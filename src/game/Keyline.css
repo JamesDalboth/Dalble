@@ -1,0 +1,6 @@
+.Keyline {
+  display: flex;
+  justify-content: center;
+  height: 8vh;
+  margin: 0.2vh;
+}

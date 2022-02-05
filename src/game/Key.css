@@ -1,0 +1,35 @@
+.Key {
+  height: 7.5vh;
+  width: 4vh;
+  color: white;
+  background-color: #818384;
+  margin: 0.5vh;
+  text-align: center;
+  justify-content: center;
+  line-height: 7.5vh;
+  border-radius: 5px;
+}
+
+.Incorrect {
+  height: 7.5vh;
+  width: 4vh;
+  color: white;
+  background-color: #3a3a3c;
+  margin: 0.5vh;
+  text-align: center;
+  justify-content: center;
+  line-height: 7.5vh;
+  border-radius: 5px;
+}
+
+.Special {
+  height: 7.5vh;
+  width: auto;
+  color: white;
+  background-color: #818384;
+  margin: 0.5vh;
+  text-align: center;
+  justify-content: center;
+  line-height: 7.5vh;
+  border-radius: 5px;
+}
