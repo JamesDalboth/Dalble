@@ -20,6 +20,7 @@ const defaultState = {
   guesses: [],
   currentGuess: [],
   word: '',
+  words: [],
   incorrectLetters: '',
   correctLetters: ''
 }
@@ -38,6 +39,7 @@ function Game() {
           guesses: [],
           currentGuess: [],
           word: words[randomNumber].toUpperCase(),
+          words: words,
           incorrectLetters: state.incorrectLetters,
           correctLetters: state.correctLetters
         };

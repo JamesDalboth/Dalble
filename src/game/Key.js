@@ -17,6 +17,7 @@ function Key(props) {
       guesses: state.guesses,
       currentGuess: [...state.currentGuess, key],
       word: state.word,
+      words: state.words,
       incorrectLetters: state.incorrectLetters,
       correctLetters: state.correctLetters
     }
@@ -39,6 +40,7 @@ function Key(props) {
       guesses: state.guesses,
       currentGuess: newGuess,
       word: state.word,
+      words: state.words,
       incorrectLetters: state.incorrectLetters,
       correctLetters: state.correctLetters
     }
@@ -57,6 +59,11 @@ function Key(props) {
       guessStr += currentGuess[i];
     }
 
+    if (!state.words.includes(guessStr.toLowerCase())) {
+      NotificationManager.info('Unfortunately that is not a word', 'Sorry!');
+      return;
+    }
+
     if (guessStr === state.word) {
       NotificationManager.success('Congratulations!', 'You got it!');
     }
@@ -72,6 +79,7 @@ function Key(props) {
       guesses: newGuesses,
       currentGuess: [],
       word: state.word,
+      words: state.words,
       incorrectLetters: state.incorrectLetters,
       correctLetters: state.correctLetters
     }

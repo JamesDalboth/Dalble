@@ -65,6 +65,7 @@ function Box(props) {
         guesses: state.guesses,
         currentGuess: state.currentGuess,
         word: state.word,
+        words: state.words,
         incorrectLetters: newIncorrectLetters,
         correctLetters: state.correctLetters
       }
