@@ -1,5 +1,9 @@
 import React, { createContext, useState } from 'react';
 
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+
+import 'react-notifications/lib/notifications.css';
+
 import raw from './words.txt';
 import './Game.css';
 
@@ -41,6 +45,20 @@ function Game() {
       });
   }
 
+  if (state.guesses.length === 6) {
+    return (
+      <GameContext.Provider value={{ state, setState }}>
+        <div className="Game">
+            <Title/>
+            {state.guesses.map((guess, i) => {
+                return <Line guess={guess} complete={true} key={i}/>
+            })}
+        </div>
+        <NotificationContainer/>
+      </GameContext.Provider>
+    )
+  }
+
   return (
     <GameContext.Provider value={{ state, setState }}>
       <div className="Game">
@@ -54,7 +72,9 @@ function Game() {
           )}
           <Keyboard/>
       </div>
+      <NotificationContainer/>
     </GameContext.Provider>
+
   );
 }
 

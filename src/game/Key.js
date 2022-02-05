@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 import './Key.css';
 import { GameContext } from './Game';
@@ -57,7 +58,7 @@ function Key(props) {
     }
 
     if (guessStr === state.word) {
-      alert('YAY!');
+      NotificationManager.success('Congratulations!', 'You got it!');
     }
 
     const newGuesses = [];
@@ -78,7 +79,7 @@ function Key(props) {
     setState(newState);
 
     if (newState.guesses.length === 6) {
-      alert("You are bad");
+      NotificationManager.error('The word was ' + state.word, 'You failed!');
     }
   }
 
