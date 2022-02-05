@@ -1,6 +1,6 @@
 .Line {
   display: flex;
   justify-content: space-around;
-  height: 9.5vh;
+  height: 9vh;
   padding: 0.25vh;
 }
