@@ -1,6 +1,6 @@
 .Box {
-  width: 9.5vh;
-  height: 9.5vh;
+  width: 9vh;
+  height: 9vh;
   border: solid #3a3a3c;
   margin: 0.25vh;
   display: flex;
