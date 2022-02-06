@@ -66,7 +66,7 @@ function Key(props) {
       guessStr += currentGuess[i];
     }
 
-    const newFailed = state.stats.fail;
+    var newFailed = state.stats.fail;
     const newSuccess = [];
     for (var i = 0; i < state.stats.success.length; i++) {
       newSuccess.push(state.stats.success[i]);
