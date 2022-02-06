@@ -9,6 +9,7 @@
   justify-content: center;
   line-height: 7.5vh;
   border-radius: 5px;
+  user-select: none;
 }
 
 .Incorrect {
@@ -22,6 +23,7 @@
   justify-content: center;
   line-height: 7.5vh;
   border-radius: 5px;
+  user-select: none;
 }
 
 .Special {
@@ -35,4 +37,5 @@
   justify-content: center;
   line-height: 7.5vh;
   border-radius: 5px;
+  user-select: none;
 }
