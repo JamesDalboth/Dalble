@@ -13,6 +13,18 @@ function Key(props) {
       return;
     }
 
+    if (state.guesses.length > 0) {
+      var lastGuess = state.guesses[state.guesses.length - 1];
+      var guessStr = '';
+      for (var i = 0; i < lastGuess.length; i++) {
+        guessStr += lastGuess[i];
+      }
+
+      if (guessStr === state.word) {
+        return;
+      }
+    } 
+
     const newState = {
       guesses: state.guesses,
       currentGuess: [...state.currentGuess, key],
