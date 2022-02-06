@@ -1,8 +1,12 @@
 .Box {
-  width: 8.5vh;
-  height: 8.5vh;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  width: 8.6vh;
+  max-width: 14vw;
+  height: 8.6vh;
+  margin: 0.2vh;
   border: solid #3a3a3c;
-  margin: 0.25vh;
   display: flex;
   text-align: center;
   justify-content: center;
@@ -10,9 +14,10 @@
 }
 
 .Box-Correct {
-  width: 8.5vh;
-  height: 8.5vh;
-  margin: 0.25vh;
+  width: 8.6vh;
+  max-width: 14vw;
+  height: 8.6vh;
+  margin: 0.2vh;
   display: flex;
   text-align: center;
   justify-content: center;
@@ -21,9 +26,10 @@
 }
 
 .Box-Incorrect {
-  width: 8.5vh;
-  height: 8.5vh;
-  margin: 0.25vh;
+  width: 8.6vh;
+  max-width: 14vw;
+  height: 8.6vh;
+  margin: 0.2vh;
   display: flex;
   text-align: center;
   justify-content: center;
@@ -32,9 +38,10 @@
 }
 
 .Box-Miss {
-  width: 8.5vh;
-  height: 8.5vh;
-  margin: 0.25vh;
+  width: 8.6vh;
+  max-width: 14vw;
+  height: 8.6vh;
+  margin: 0.2vh;
   display: flex;
   text-align: center;
   justify-content: center;
