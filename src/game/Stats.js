@@ -1,6 +1,7 @@
 import './Stats.css';
 import { useContext } from 'react';
 import { GameContext } from './Game';
+import Countdown from 'react-countdown';
 
 function Stats() {
   const { state, setState } = useContext(GameContext);
@@ -16,9 +17,17 @@ function Stats() {
     return percCorrect;
   }
 
+  var d = new Date();
+  d.setHours(24,0,0,0);
+
+  const renderer = ({ hours, minutes, seconds, completed }) => {
+    return <span>{hours}h:{minutes}m:{seconds}s</span>;
+  };
+
   return (
     <div className="Stats">
-      {percentageCorrect() + "% Correct"}
+      <div>{percentageCorrect() + "% Correct"}</div>
+      <div><Countdown date={d} renderer={renderer}/> {" left until next puzzle!"}</div>
     </div>
   );
 }
