@@ -22,18 +22,34 @@ const defaultState = {
   word: '',
   words: [],
   incorrectLetters: '',
-  correctLetters: ''
+  correctLetters: '',
+  lastDate: ''
+}
+
+function useStickyState(defaultValue, key) {
+  const [value, setValue] = React.useState(() => {
+    const stickyValue = window.localStorage.getItem(key);
+    return stickyValue !== null
+      ? JSON.parse(stickyValue)
+      : defaultValue;
+  });
+  React.useEffect(() => {
+    window.localStorage.setItem(key, JSON.stringify(value));
+  }, [key, value]);
+  return [value, setValue];
 }
 
 function Game() {
-  const [state, setState] = useState(defaultState);
+  const [state, setState] = useStickyState(defaultState);
 
-  if (state.word === '') {
+  const dateStr = new Date().toLocaleDateString();
+
+  if (state.word === '' || dateStr !== state.lastDate) {
     fetch(raw)
       .then(r => r.text())
       .then(text => {
         const words = text.split(' ');
-        const generator = seedrandom(new Date().toLocaleDateString());
+        const generator = seedrandom(dateStr);
         const randomNumber = Math.floor(generator() * words.length);
         const startState = {
           guesses: [],
@@ -41,13 +57,31 @@ function Game() {
           word: words[randomNumber].toUpperCase(),
           words: words,
           incorrectLetters: state.incorrectLetters,
-          correctLetters: state.correctLetters
+          correctLetters: state.correctLetters,
+          lastDate: dateStr
         };
         setState(startState);
       });
   }
 
+  var complete = false;
   if (state.guesses.length === 6) {
+    complete = true;
+  }
+
+  if (state.guesses.length > 0) {
+    var lastGuess = state.guesses[state.guesses.length - 1];
+    var guessStr = '';
+    for (var i = 0; i < lastGuess.length; i++) {
+      guessStr += lastGuess[i];
+    }
+
+    if (guessStr === state.word) {
+      complete = true;
+    }
+  }
+
+  if (complete) {
     return (
       <GameContext.Provider value={{ state, setState }}>
         <div className="Game">
@@ -55,6 +89,9 @@ function Game() {
             {state.guesses.map((guess, i) => {
                 return <Line guess={guess} complete={true} key={i}/>
             })}
+            {[...Array(6 - state.guesses.length)].map((x, i) =>
+                <Line key={state.guesses.length + i}/>
+            )}
         </div>
         <NotificationContainer/>
       </GameContext.Provider>
