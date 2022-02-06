@@ -70,11 +70,11 @@ function Stats() {
 
   return (
     <div className="Stats">
-      <div className="Count"><Countdown date={d} renderer={renderer}/> {" left until next puzzle!"}</div>
+      <div className="Count"><Countdown date={d} renderer={renderer}/> {" NEXT DALBLE"}</div>
       <hr/>
-      <div className="Perc">{percCorrect + "% Correct"}</div>
+      <div className="Perc">{"WIN % - " + percCorrect + " || TOTAL PLAYED - " + (totalCorrect + state.stats.fail)}</div>
       <hr/>
-      <div className="BarTitle">How many attempts at success?</div>
+      <div className="BarTitle">GUESS DISTRIBUTION</div>
       <div className="Bar"><Bar data={data} options={barOptions}/></div>
     </div>
   );
