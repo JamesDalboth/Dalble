@@ -3,4 +3,22 @@
     align-items: center;
     justify-content: center;
     flex-direction:column;
+    height: 25vh;
+    margin: 1vh;
+}
+
+.Count {
+    height: 5vh;
+}
+
+.Perc {
+    height: 5vh;
+}
+
+.BarTitle {
+    height: 5vh;
+}
+
+.Bar {
+  height: 10vh;
 }

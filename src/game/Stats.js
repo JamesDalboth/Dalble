@@ -2,20 +2,36 @@ import './Stats.css';
 import { useContext } from 'react';
 import { GameContext } from './Game';
 import Countdown from 'react-countdown';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import { Bar } from 'react-chartjs-2';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 function Stats() {
   const { state, setState } = useContext(GameContext);
 
-  function percentageCorrect() {
-    var totalCorrect = 0;
+  var totalCorrect = 0;
 
-    for (var i = 0; i < state.stats.success.length; i++) {
-      totalCorrect += state.stats.success[i];
-    }
-
-    const percCorrect = totalCorrect * 100 / (totalCorrect + state.stats.fail);
-    return percCorrect;
+  for (var i = 0; i < state.stats.success.length; i++) {
+    totalCorrect += state.stats.success[i];
   }
+
+  const percCorrect = totalCorrect * 100 / (totalCorrect + state.stats.fail);
 
   var d = new Date();
   d.setHours(24,0,0,0);
@@ -24,10 +40,42 @@ function Stats() {
     return <span>{hours}h:{minutes}m:{seconds}s</span>;
   };
 
+  const labels = [1, 2, 3, 4, 5, 6];
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        data: state.stats.success,
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      }
+    ],
+  };
+
+  const barOptions = {
+    title: {
+      display: true,
+      text: 'How many attempts at success?',
+    },
+    plugins: {
+      legend: {
+        display: false
+      },
+      title: {
+        display: true
+      }
+    }
+  };
+
   return (
     <div className="Stats">
-      <div>{percentageCorrect() + "% Correct"}</div>
-      <div><Countdown date={d} renderer={renderer}/> {" left until next puzzle!"}</div>
+      <div className="Count"><Countdown date={d} renderer={renderer}/> {" left until next puzzle!"}</div>
+      <hr/>
+      <div className="Perc">{percCorrect + "% Correct"}</div>
+      <hr/>
+      <div className="BarTitle">How many attempts at success?</div>
+      <div className="Bar"><Bar data={data} options={barOptions}/></div>
     </div>
   );
 }
