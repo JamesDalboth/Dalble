@@ -16,7 +16,9 @@ function Box(props) {
           words: state.words,
           incorrectLetters: state.incorrectLetters,
           correctLetters: newCorrectLetters,
-          lastDate: state.lastDate
+          lastDate: state.lastDate,
+          stats: state.stats,
+          statev: state.statev
         }
 
         setState(newState);
@@ -53,7 +55,9 @@ function Box(props) {
           words: state.words,
           incorrectLetters: state.incorrectLetters,
           correctLetters: newCorrectLetters,
-          lastDate: state.lastDate
+          lastDate: state.lastDate,
+          stats: state.stats,
+          statev: state.statev
         }
 
         setState(newState);
@@ -72,7 +76,9 @@ function Box(props) {
         words: state.words,
         incorrectLetters: newIncorrectLetters,
         correctLetters: state.correctLetters,
-        lastDate: state.lastDate
+        lastDate: state.lastDate,
+        stats: state.stats,
+        statev: state.statev
       }
 
       setState(newState);

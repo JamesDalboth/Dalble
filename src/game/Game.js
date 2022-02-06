@@ -10,6 +10,7 @@ import './Game.css';
 import Line from './Line';
 import Keyboard from './Keyboard';
 import Title from './Title';
+import Stats from './Stats';
 
 const seedrandom = require('seedrandom');
 
@@ -23,12 +24,18 @@ const defaultState = {
   words: [],
   incorrectLetters: '',
   correctLetters: '',
-  lastDate: ''
+  lastDate: '',
+  stats: {
+    fail: 0,
+    success: [0, 0, 0, 0, 0, 0]
+  },
+  statev: 'd2'
 }
 
 function useStickyState(defaultValue, key) {
   const [value, setValue] = React.useState(() => {
     const stickyValue = window.localStorage.getItem(key);
+    console.log(stickyValue);
     return stickyValue !== null
       ? JSON.parse(stickyValue)
       : defaultValue;
@@ -40,9 +47,13 @@ function useStickyState(defaultValue, key) {
 }
 
 function Game() {
-  const [state, setState] = useStickyState(defaultState);
+  const [state, setState] = useStickyState(defaultState, "dalble");
 
-  const dateStr = new Date().toLocaleDateString();
+  if (state.statev !== defaultState.statev) {
+    setState(defaultState);
+  }
+
+  const dateStr = new Date().toLocaleDateString() + "dev2";
 
   if (state.word === '' || dateStr !== state.lastDate) {
     fetch(raw)
@@ -56,13 +67,17 @@ function Game() {
           currentGuess: [],
           word: words[randomNumber].toUpperCase(),
           words: words,
-          incorrectLetters: state.incorrectLetters,
-          correctLetters: state.correctLetters,
-          lastDate: dateStr
+          incorrectLetters: '',
+          correctLetters: '',
+          lastDate: dateStr,
+          stats: state.stats,
+          statev: state.statev
         };
         setState(startState);
       });
   }
+
+
 
   var complete = false;
   if (state.guesses.length === 6) {
@@ -92,8 +107,8 @@ function Game() {
             {[...Array(6 - state.guesses.length)].map((x, i) =>
                 <Line key={state.guesses.length + i}/>
             )}
+            <Stats/>
         </div>
-        <NotificationContainer/>
       </GameContext.Provider>
     )
   }

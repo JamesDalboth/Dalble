@@ -20,7 +20,9 @@ function Key(props) {
       words: state.words,
       incorrectLetters: state.incorrectLetters,
       correctLetters: state.correctLetters,
-      lastDate: state.lastDate
+      lastDate: state.lastDate,
+      stats: state.stats,
+      statev: state.statev
     }
 
     setState(newState);
@@ -44,7 +46,9 @@ function Key(props) {
       words: state.words,
       incorrectLetters: state.incorrectLetters,
       correctLetters: state.correctLetters,
-      lastDate: state.lastDate
+      lastDate: state.lastDate,
+      stats: state.stats,
+      statev: state.statev
     }
 
     setState(newState);
@@ -61,6 +65,12 @@ function Key(props) {
       guessStr += currentGuess[i];
     }
 
+    const newFailed = state.stats.fail;
+    const newSuccess = [];
+    for (var i = 0; i < state.stats.success.length; i++) {
+      newSuccess.push(state.stats.success[i]);
+    }
+
     if (!state.words.includes(guessStr.toLowerCase())) {
       NotificationManager.info('Unfortunately that is not a word', 'Sorry!');
       return;
@@ -68,6 +78,7 @@ function Key(props) {
 
     if (guessStr === state.word) {
       NotificationManager.success('Congratulations!', 'You got it!');
+      newSuccess[state.guesses.length]++;
     }
 
     const newGuesses = [];
@@ -77,6 +88,11 @@ function Key(props) {
 
     newGuesses.push(currentGuess);
 
+    if (newGuesses.length === 6) {
+      NotificationManager.error('The word was ' + state.word, 'You failed!');
+      newFailed++;
+    }
+
     const newState = {
       guesses: newGuesses,
       currentGuess: [],
@@ -84,14 +100,15 @@ function Key(props) {
       words: state.words,
       incorrectLetters: state.incorrectLetters,
       correctLetters: state.correctLetters,
-      lastDate: state.lastDate
+      lastDate: state.lastDate,
+      stats: {
+        fail: newFailed,
+        success: newSuccess
+      },
+      statev: state.statev
     }
 
     setState(newState);
-
-    if (newState.guesses.length === 6) {
-      NotificationManager.error('The word was ' + state.word, 'You failed!');
-    }
   }
 
   if (props.enter) {
