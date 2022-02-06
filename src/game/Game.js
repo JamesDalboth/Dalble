@@ -109,6 +109,7 @@ function Game() {
             )}
             <Stats/>
         </div>
+        <NotificationContainer/>
       </GameContext.Provider>
     )
   }

@@ -29,8 +29,6 @@ function Box(props) {
 
     var word = String(state.word);
 
-    console.log(props.index);
-
     for (var i = 0; i < 6; i++) {
       if (state.word[i] === props.guess[i]) {
         word = word.slice(0, i) + '_' + word.slice(i + 1, word.length);

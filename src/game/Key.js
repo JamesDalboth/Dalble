@@ -55,6 +55,7 @@ function Key(props) {
   }
 
   function enter() {
+    console.log("1111");
     var currentGuess = state.currentGuess;
     if (currentGuess.length < 5) {
       return;
@@ -76,7 +77,9 @@ function Key(props) {
       return;
     }
 
+    console.log("Hmmm");
     if (guessStr === state.word) {
+      console.log("Hello");
       NotificationManager.success('Congratulations!', 'You got it!');
       newSuccess[state.guesses.length]++;
     }
