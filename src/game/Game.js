@@ -29,7 +29,7 @@ const defaultState = {
     fail: 0,
     success: [0, 0, 0, 0, 0, 0]
   },
-  statev: 'd2'
+  statev: '1'
 }
 
 function useStickyState(defaultValue, key) {
@@ -53,7 +53,7 @@ function Game() {
     setState(defaultState);
   }
 
-  const dateStr = new Date().toLocaleDateString() + "dev2";
+  const dateStr = new Date().toLocaleDateString();
 
   if (state.word === '' || dateStr !== state.lastDate) {
     fetch(raw)
