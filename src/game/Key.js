@@ -6,7 +6,7 @@ import { GameContext } from './Game';
 
 function Key(props) {
   const { state, setState } = useContext(GameContext);
-
+  
   function pressKey(key) {
     var currentGuess = state.currentGuess;
     if (currentGuess.length === 5) {
@@ -55,7 +55,6 @@ function Key(props) {
   }
 
   function enter() {
-    console.log("1111");
     var currentGuess = state.currentGuess;
     if (currentGuess.length < 5) {
       return;
@@ -77,9 +76,7 @@ function Key(props) {
       return;
     }
 
-    console.log("Hmmm");
     if (guessStr === state.word) {
-      console.log("Hello");
       NotificationManager.success('Congratulations!', 'You got it!');
       newSuccess[state.guesses.length]++;
     }
@@ -91,7 +88,7 @@ function Key(props) {
 
     newGuesses.push(currentGuess);
 
-    if (newGuesses.length === 6) {
+    if (newGuesses.length === 6 && guessStr !== state.word) {
       NotificationManager.error('The word was ' + state.word, 'You failed!');
       newFailed++;
     }
