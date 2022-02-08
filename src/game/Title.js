@@ -3,7 +3,8 @@ import './Title.css';
 function Title() {
   return (
     <div className="Title">
-      Dalble
+      DALBLE
+      <hr/>
     </div>
   );
 }

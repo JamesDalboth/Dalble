@@ -61,8 +61,6 @@ function Box(props) {
 
     var letters = String(word);
 
-    console.log(letters);
-
     // Remove precise letters
     for (var i = 0; i < 6; i++) {
       if (word[i] === props.guess[i]) {

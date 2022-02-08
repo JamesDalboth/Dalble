@@ -11,6 +11,7 @@
   text-align: center;
   justify-content: center;
   line-height: 9.5vh;
+  font-family: MyFont;
 }
 
 .Box-Correct {
@@ -23,6 +24,7 @@
   justify-content: center;
   line-height: 9.5vh;
   background-color: #538d4e;
+  font-family: MyFont;
 }
 
 .Box-Incorrect {
@@ -35,6 +37,7 @@
   justify-content: center;
   line-height: 9.5vh;
   background-color: #3a3a3c;
+  font-family: MyFont;
 }
 
 .Box-Miss {
@@ -47,4 +50,5 @@
   justify-content: center;
   line-height: 9.5vh;
   background-color: #b59f3b;
+  font-family: MyFont;
 }

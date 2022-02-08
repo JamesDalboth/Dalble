@@ -3,4 +3,10 @@
   justify-content: space-around;
   height: 5vh;
   margin: 1vh;
+  font-family: MyFont;
+  flex-direction: column;
+}
+
+hr {
+  width: 50%
 }

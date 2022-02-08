@@ -4,21 +4,30 @@
     justify-content: center;
     flex-direction:column;
     height: 25vh;
-    margin: 1vh;
+    margin: 2.5vh;
+    font-family: MyFont;
 }
 
 .Count {
     height: 5vh;
+    font-family: MyFont;
 }
 
 .Perc {
     height: 5vh;
+    font-family: MyFont;
 }
 
 .BarTitle {
     height: 5vh;
+    font-family: MyFont;
 }
 
 .Bar {
   height: 10vh;
+  font-family: MyFont;
+}
+
+hr {
+  width: 50%
 }
