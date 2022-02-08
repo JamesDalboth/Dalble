@@ -5,81 +5,89 @@ import { GameContext } from './Game';
 function Box(props) {
   const { state, setState } = useContext(GameContext);
 
-  function match() {
-    if (state.word[props.index] === props.value) {
-      if (!state.correctLetters.includes(props.value)) {
-        const newCorrectLetters = String(state.correctLetters) + props.value;
-        const newState = {
-          guesses: state.guesses,
-          currentGuess: state.currentGuess,
-          word: state.word,
-          words: state.words,
-          incorrectLetters: state.incorrectLetters,
-          correctLetters: newCorrectLetters,
-          lastDate: state.lastDate,
-          stats: state.stats,
-          statev: state.statev
-        }
+  const puzzleInfo = state.puzzle;
+  const guesses = puzzleInfo.guesses;
+  const word = puzzleInfo.word;
+  const currentGuess = puzzleInfo.currentGuess;
+  const incorrect = puzzleInfo.letters.incorrect;
+  const correct = puzzleInfo.letters.correct;
 
-        setState(newState);
+  function updateCorrectLetters(letter) {
+    const newCorrectLetters = String(correct) + letter;
+    const newState = {
+      puzzle: {
+        guesses: guesses,
+        currentGuess: currentGuess,
+        word: word,
+        letters: {
+          correct: newCorrectLetters,
+          incorrect: incorrect
+        }
+      },
+      words: state.words,
+      stats: state.stats
+    }
+
+    setState(newState);
+  }
+
+  function updateIncorrectLetters(letter) {
+    const newIncorrectLetters = String(incorrect) + letter;
+    const newState = {
+      puzzle: {
+        guesses: guesses,
+        currentGuess: currentGuess,
+        word: word,
+        letters: {
+          correct: correct,
+          incorrect: newIncorrectLetters
+        }
+      },
+      words: state.words,
+      stats: state.stats
+    }
+
+    setState(newState);
+  }
+
+  function match() {
+    if (word[props.index] === props.value) {
+      if (!correct.includes(props.value)) {
+        updateCorrectLetters(props.value);
       }
 
       return 'CORRECT';
     }
 
-    var word = String(state.word);
+    var letters = String(word);
 
+    console.log(letters);
+
+    // Remove precise letters
     for (var i = 0; i < 6; i++) {
-      if (state.word[i] === props.guess[i]) {
-        word = word.slice(0, i) + '_' + word.slice(i + 1, word.length);
+      if (word[i] === props.guess[i]) {
+        letters = letters.slice(0, i) + '_' + letters.slice(i + 1, letters.length);
       }
     }
 
     for (var i = 0; i < props.index; i++) {
-      const ind = word.indexOf(props.guess[i]);
+      const ind = letters.indexOf(props.guess[i]);
       if (ind !== -1) {
-        word = word.slice(0, ind) + word.slice(ind + 1, word.length);
+        letters = letters.slice(0, ind) + letters.slice(ind + 1, letters.length);
       }
     }
 
-    const ind = word.indexOf(props.value);
+    const ind = letters.indexOf(props.value);
     if (ind !== -1) {
-      if (!state.correctLetters.includes(props.value)) {
-        const newCorrectLetters = String(state.correctLetters) + props.value;
-        const newState = {
-          guesses: state.guesses,
-          currentGuess: state.currentGuess,
-          word: state.word,
-          words: state.words,
-          incorrectLetters: state.incorrectLetters,
-          correctLetters: newCorrectLetters,
-          lastDate: state.lastDate,
-          stats: state.stats,
-          statev: state.statev
-        }
-
-        setState(newState);
+      if (!correct.includes(props.value)) {
+        updateCorrectLetters(props.value);
       }
 
       return 'MISS';
     }
 
-
-    if (!state.incorrectLetters.includes(props.value)) {
-      const newIncorrectLetters = String(state.incorrectLetters) + props.value;
-      const newState = {
-        guesses: state.guesses,
-        currentGuess: state.currentGuess,
-        word: state.word,
-        words: state.words,
-        incorrectLetters: newIncorrectLetters,
-        correctLetters: state.correctLetters,
-        lastDate: state.lastDate,
-        stats: state.stats,
-        statev: state.statev
-      }
-
-      setState(newState);
+    if (!incorrect.includes(props.value)) {
+      updateIncorrectLetters(props.value);
     }
 
     return 'INCORRECT';

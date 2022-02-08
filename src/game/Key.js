@@ -6,56 +6,58 @@ import { GameContext } from './Game';
 
 function Key(props) {
   const { state, setState } = useContext(GameContext);
-  
+
+  const puzzleInfo = state.puzzle;
+  const guesses = puzzleInfo.guesses;
+  const word = puzzleInfo.word;
+  const currentGuess = puzzleInfo.currentGuess;
+  const incorrect = puzzleInfo.letters.incorrect;
+  const correct = puzzleInfo.letters.correct;
+
   function pressKey(key) {
-    var currentGuess = state.currentGuess;
     if (currentGuess.length === 5) {
       return;
     }
 
     const newState = {
-      guesses: state.guesses,
-      currentGuess: [...state.currentGuess, key],
-      word: state.word,
+      puzzle: {
+        guesses: guesses,
+        currentGuess: [...currentGuess, key],
+        word: word,
+        letters: puzzleInfo.letters
+      },
       words: state.words,
-      incorrectLetters: state.incorrectLetters,
-      correctLetters: state.correctLetters,
-      lastDate: state.lastDate,
-      stats: state.stats,
-      statev: state.statev
+      stats: state.stats
     }
 
     setState(newState);
   }
 
   function del() {
-    var currentGuess = state.currentGuess;
     if (currentGuess.length === 0) {
       return;
     }
 
     const newGuess = [];
-    for (var i = 0; i < state.currentGuess.length - 1; i++) {
-      newGuess.push(state.currentGuess[i]);
+    for (var i = 0; i < currentGuess.length - 1; i++) {
+      newGuess.push(currentGuess[i]);
     }
 
     const newState = {
-      guesses: state.guesses,
-      currentGuess: newGuess,
-      word: state.word,
+      puzzle: {
+        guesses: guesses,
+        currentGuess: newGuess,
+        word: word,
+        letters: puzzleInfo.letters
+      },
       words: state.words,
-      incorrectLetters: state.incorrectLetters,
-      correctLetters: state.correctLetters,
-      lastDate: state.lastDate,
-      stats: state.stats,
-      statev: state.statev
+      stats: state.stats
     }
 
     setState(newState);
   }
 
   function enter() {
-    var currentGuess = state.currentGuess;
     if (currentGuess.length < 5) {
       return;
     }
@@ -66,46 +68,50 @@ function Key(props) {
     }
 
     var newFailed = state.stats.fail;
-    const newSuccess = [];
-    for (var i = 0; i < state.stats.success.length; i++) {
+    var newSuccess = [];
+
+    for (var i = 0; i < 6; i++) {
       newSuccess.push(state.stats.success[i]);
     }
 
-    if (!state.words.includes(guessStr.toLowerCase())) {
+    if (!state.words.guesses.includes(guessStr.toLowerCase()) &&
+        !state.words.answers.includes(guessStr.toLowerCase())) {
+      console.log(guessStr.toLowerCase());
+      console.log(state.words.answers.includes(guessStr.toLowerCase()));
       NotificationManager.info('Unfortunately that is not a word', 'Sorry!');
       return;
     }
 
-    if (guessStr === state.word) {
+    if (guessStr === word) {
       NotificationManager.success('Congratulations!', 'You got it!');
-      newSuccess[state.guesses.length]++;
+      newSuccess[guesses.length]++;
     }
 
     const newGuesses = [];
-    for (var i = 0; i < state.guesses.length; i++) {
-      newGuesses.push(state.guesses[i]);
+    for (var i = 0; i < guesses.length; i++) {
+      newGuesses.push(guesses[i]);
     }
 
     newGuesses.push(currentGuess);
 
-    if (newGuesses.length === 6 && guessStr !== state.word) {
-      NotificationManager.error('The word was ' + state.word, 'You failed!');
+    if (newGuesses.length === 6 && guessStr !== word) {
+      NotificationManager.error('The word was ' + word, 'You failed!');
       newFailed++;
     }
 
     const newState = {
-      guesses: newGuesses,
-      currentGuess: [],
-      word: state.word,
+      puzzle: {
+        guesses: newGuesses,
+        currentGuess: [],
+        word: word,
+        letters: puzzleInfo.letters
+      },
       words: state.words,
-      incorrectLetters: state.incorrectLetters,
-      correctLetters: state.correctLetters,
-      lastDate: state.lastDate,
       stats: {
+        lastDate: state.stats.lastDate,
         fail: newFailed,
         success: newSuccess
       },
-      statev: state.statev
     }
 
     setState(newState);
@@ -127,7 +133,7 @@ function Key(props) {
     );
   }
 
-  if (state.incorrectLetters.includes(props.value) && !state.correctLetters.includes(props.value)) {
+  if (incorrect.includes(props.value) && !correct.includes(props.value)) {
     return (
       <div className="Incorrect" onClick={() => {pressKey(props.value)}}>
         {props.value}

@@ -1,10 +1,11 @@
 import React, { createContext, useState } from 'react';
-
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 import 'react-notifications/lib/notifications.css';
 
-import raw from './words.txt';
+import answers_raw from './words.txt';
+import guesses_raw from './guesses.txt';
+
 import './Game.css';
 
 import Line from './Line';
@@ -14,26 +15,31 @@ import Stats from './Stats';
 
 const seedrandom = require('seedrandom');
 
-
 export const GameContext = createContext();
 
 const defaultState = {
-  guesses: [],
-  currentGuess: [],
-  word: '',
-  words: [],
-  incorrectLetters: '',
-  correctLetters: '',
-  lastDate: '',
+  puzzle: {
+    guesses: [],
+    currentGuess: [],
+    word: '',
+    letters: {
+      incorrect: [],
+      correct: []
+    }
+  },
+  words: {
+    guesses: [],
+    answers: [],
+  },
   stats: {
+    lastDate: '',
     fail: 0,
     success: [0, 0, 0, 0, 0, 0]
-  },
-  statev: '1'
+  }
 }
 
 function useStickyState(defaultValue, key) {
-  const [value, setValue] = React.useState(() => {
+  const [value, setValue] = useState(() => {
     const stickyValue = window.localStorage.getItem(key);
     return stickyValue !== null
       ? JSON.parse(stickyValue)
@@ -48,48 +54,126 @@ function useStickyState(defaultValue, key) {
 function Game() {
   const [state, setState] = useStickyState(defaultState, "dalble");
 
-  if (state.statev !== defaultState.statev) {
-    setState(defaultState);
+  const dateStr = new Date().toLocaleDateString('en-GB');
+
+  // Migrate old stats
+  if (state.lastDate !== undefined && state.stats.lastDate === undefined) {
+    const newState = {
+      puzzle: {
+        guesses: state.guesses,
+        currentGuess: state.currentGuess,
+        word: state.word,
+        letters: {
+          incorrect: state.incorrectLetters,
+          correct: state.correctLetters
+        }
+      },
+      words: {
+        guesses: [],
+        answers: [],
+      },
+      stats: {
+        lastDate: state.lastDate,
+        fail: state.stats.fail,
+        success: state.stats.success
+      }
+    }
+    setState(newState);
+    return;
   }
 
-  const dateStr = new Date().toLocaleDateString('en-GB');
-  console.log("Date seed - " + dateStr);
-
-  if (state.word === '' || dateStr !== state.lastDate) {
-    fetch(raw)
+  // Download valid guess words
+  if (state.words.guesses.length === 0) {
+    console.log("Downloading guesses...");
+    fetch(guesses_raw)
       .then(r => r.text())
       .then(text => {
-        const words = text.split(' ');
-        const generator = seedrandom(dateStr);
-        const randomNumber = Math.floor(generator() * words.length);
-        const startState = {
-          guesses: [],
-          currentGuess: [],
-          word: words[randomNumber].toUpperCase(),
-          words: words,
-          incorrectLetters: '',
-          correctLetters: '',
-          lastDate: dateStr,
-          stats: state.stats,
-          statev: state.statev
+        const words = text.split('\n');
+        const newState = {
+          puzzle: state.puzzle,
+          words: {
+            guesses: words,
+            answers: state.words.answers
+          },
+          stats: state.stats
         };
-        setState(startState);
+        setState(newState);
       });
   }
 
+  // Download valid answer words
+  if (state.words.guesses.length > 0 && state.words.answers.length === 0) {
+    console.log("Downloading answers...");
+    fetch(answers_raw)
+      .then(r => r.text())
+      .then(text => {
+        const words = text.split('\n');
+        const newState = {
+          puzzle: state.puzzle,
+          words: {
+            guesses: state.words.guesses,
+            answers: words
+          },
+          stats: state.stats
+        };
+        setState(newState);
+      });
+  }
+
+  if (state.words.guesses.length === 0 || state.words.answers.length === 0) {
+    return (
+      <GameContext.Provider value={{ state, setState }}>
+        <div className="Game">
+            <Title/>
+        </div>
+        <NotificationContainer/>
+      </GameContext.Provider>
+    );
+  }
+
+  // Setup today
+  if (dateStr !== state.stats.lastDate && state.words.guesses.length !== 0 && state.words.answers.length !== 0) {
+    console.log("Setting up puzzle for today...");
+    const generator = seedrandom(dateStr);
+    const randomNumber = Math.floor(generator() * state.words.answers.length);
+    const startState = {
+      puzzle: {
+        guesses: [],
+        currentGuess: [],
+        word: state.words.answers[randomNumber].toUpperCase(),
+        letters: {
+          incorrect: [],
+          correct: []
+        }
+      },
+      words: state.words,
+      stats: {
+        lastDate: dateStr,
+        fail: state.stats.fail,
+        success: state.stats.success
+      }
+    };
+    setState(startState);
+  }
+
+  const puzzleInfo = state.puzzle;
+  const guesses = puzzleInfo.guesses;
+  const noGuesses = guesses.length;
+  const lastGuess = guesses[noGuesses - 1];
+  const word = puzzleInfo.word;
+  var lastGuessStr = '';
+
   var complete = false;
-  if (state.guesses.length === 6) {
+  if (noGuesses === 6) {
     complete = true;
   }
 
-  if (state.guesses.length > 0) {
-    var lastGuess = state.guesses[state.guesses.length - 1];
-    var guessStr = '';
+  if (noGuesses > 0) {
     for (var i = 0; i < lastGuess.length; i++) {
-      guessStr += lastGuess[i];
+      lastGuessStr += lastGuess[i];
     }
 
-    if (guessStr === state.word) {
+    if (lastGuessStr === word) {
       complete = true;
     }
   }
@@ -99,11 +183,11 @@ function Game() {
       <GameContext.Provider value={{ state, setState }}>
         <div className="Game">
             <Title/>
-            {state.guesses.map((guess, i) => {
+            {guesses.map((guess, i) => {
                 return <Line guess={guess} complete={true} key={i}/>
             })}
-            {[...Array(6 - state.guesses.length)].map((x, i) =>
-                <Line key={state.guesses.length + i}/>
+            {[...Array(6 - noGuesses)].map((x, i) =>
+                <Line key={noGuesses + i}/>
             )}
             <Stats/>
         </div>
@@ -116,12 +200,12 @@ function Game() {
     <GameContext.Provider value={{ state, setState }}>
       <div className="Game">
           <Title/>
-          {state.guesses.map((guess, i) => {
+          {guesses.map((guess, i) => {
               return <Line guess={guess} complete={true} key={i}/>
           })}
-          <Line guess={state.currentGuess} complete={false}/>
-          {[...Array(5 - state.guesses.length)].map((x, i) =>
-              <Line key={state.guesses.length + i}/>
+          <Line guess={puzzleInfo.currentGuess} complete={false}/>
+          {[...Array(5 - noGuesses)].map((x, i) =>
+              <Line key={noGuesses + i}/>
           )}
           <Keyboard/>
       </div>
