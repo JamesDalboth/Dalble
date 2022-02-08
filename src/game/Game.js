@@ -52,7 +52,7 @@ function Game() {
     setState(defaultState);
   }
 
-  const dateStr = new Date().toLocaleDateString();
+  const dateStr = new Date().toLocaleDateString('en-GB');
   console.log("Date seed - " + dateStr);
 
   if (state.word === '' || dateStr !== state.lastDate) {
