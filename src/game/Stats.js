@@ -70,7 +70,7 @@ function Stats() {
 
   return (
     <div className="Stats">
-      <div className="Count"><Countdown date={d} renderer={renderer}/> {" NEXT DALBLE"}</div>
+      <div className="Count"><Countdown date={d} renderer={renderer}/> {" NEXT DALBLE || LAST WORD WAS " + state.puzzle.word}</div>
       <hr/>
       <div className="Perc">{"WIN % - " + percCorrect + " || TOTAL PLAYED - " + (totalCorrect + state.stats.fail)}</div>
       <hr/>
