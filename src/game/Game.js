@@ -54,7 +54,13 @@ function useStickyState(defaultValue, key) {
 function Game() {
   const [state, setState] = useStickyState(defaultState, "dalble");
 
-  const dateStr = new Date().toLocaleDateString('en-GB');
+  const dateStr = new Date().toLocaleDateString("en-GB", { // you can use undefined as first argument
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+  
+  console.log(dateStr);
 
   // Migrate old stats
   if (state.lastDate !== undefined && state.stats.lastDate === undefined) {
