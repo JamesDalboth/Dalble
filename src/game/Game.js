@@ -59,7 +59,7 @@ function Game() {
     month: "2-digit",
     day: "2-digit",
   });
-  
+
   console.log(dateStr);
 
   // Migrate old stats
@@ -135,6 +135,29 @@ function Game() {
         <NotificationContainer/>
       </GameContext.Provider>
     );
+  }
+
+  if (state.puzzle.word === 'THE') {
+    const generator = seedrandom(dateStr + "whoops");
+    const randomNumber = Math.floor(generator() * state.words.answers.length);
+    const startState = {
+      puzzle: {
+        guesses: [],
+        currentGuess: [],
+        word: state.words.answers[randomNumber].toUpperCase(),
+        letters: {
+          incorrect: [],
+          correct: []
+        }
+      },
+      words: state.words,
+      stats: {
+        lastDate: dateStr,
+        fail: state.stats.fail - 1,
+        success: state.stats.success
+      }
+    };
+    setState(startState);
   }
 
   // Setup today
