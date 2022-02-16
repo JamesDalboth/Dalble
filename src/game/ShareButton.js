@@ -24,7 +24,17 @@ const handleOnClick = (guesses, word, date) => {
   if ('clipboard' in navigator && window.isSecureContext) {
     navigator.clipboard.writeText(res);
   } else {
-    document.execCommand('copy', true, res);
+    console.log("Backup copy");
+    let textArea = document.createElement("textarea");
+    textArea.value = res;
+    textArea.style.position = "fixed";
+    textArea.style.left = "-999999px";
+    textArea.style.right = "-999999px";
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    document.execCommand('copy');
+    textArea.remove();
   }
 
   NotificationManager.info('Results copied to clipboard!', 'Share with friends!');
