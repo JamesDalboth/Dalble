@@ -4,6 +4,7 @@
   -webkit-box-sizing: border-box;
   width: 8.6vh;
   max-width: 14vw;
+  max-height: 14vw;
   height: 8.6vh;
   margin: 0.2vh;
   border: solid #3a3a3c;
@@ -17,6 +18,7 @@
 .Box-Correct {
   width: 8.6vh;
   max-width: 14vw;
+  max-height: 14vw;
   height: 8.6vh;
   margin: 0.2vh;
   display: flex;
@@ -30,6 +32,7 @@
 .Box-Incorrect {
   width: 8.6vh;
   max-width: 14vw;
+  max-height: 14vw;
   height: 8.6vh;
   margin: 0.2vh;
   display: flex;
@@ -43,6 +46,7 @@
 .Box-Miss {
   width: 8.6vh;
   max-width: 14vw;
+  max-height: 14vw;
   height: 8.6vh;
   margin: 0.2vh;
   display: flex;
