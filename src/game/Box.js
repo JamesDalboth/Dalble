@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import './Box.css';
 import { GameContext } from './Game';
+import { colour } from './Util.js';
 
 function Box(props) {
   const { state, setState } = useContext(GameContext);
@@ -50,49 +51,25 @@ function Box(props) {
     setState(newState);
   }
 
-  function match() {
-    if (word[props.index] === props.value) {
-      if (!correct.includes(props.value)) {
-        updateCorrectLetters(props.value);
-      }
-
-      return 'CORRECT';
+  function match(letter, index, guess, word) {
+    const col = colour(letter, index, guess, word);
+    if (correct.includes(letter) || incorrect.includes(letter)) {
+      return col;
     }
 
-    var letters = String(word);
-
-    // Remove precise letters
-    for (var i = 0; i < 6; i++) {
-      if (word[i] === props.guess[i]) {
-        letters = letters.slice(0, i) + '_' + letters.slice(i + 1, letters.length);
-      }
+    if (col === 'CORRECT' || col === 'MISS') {
+      updateCorrectLetters(letter);
     }
 
-    for (var i = 0; i < props.index; i++) {
-      const ind = letters.indexOf(props.guess[i]);
-      if (ind !== -1) {
-        letters = letters.slice(0, ind) + letters.slice(ind + 1, letters.length);
-      }
+    if (col === 'INCORRECT') {
+      updateIncorrectLetters(letter);
     }
 
-    const ind = letters.indexOf(props.value);
-    if (ind !== -1) {
-      if (!correct.includes(props.value)) {
-        updateCorrectLetters(props.value);
-      }
-
-      return 'MISS';
-    }
-
-    if (!incorrect.includes(props.value)) {
-      updateIncorrectLetters(props.value);
-    }
-
-    return 'INCORRECT';
+    return col;
   }
 
   if (props.complete) {
-    const result = match();
+    const result = match(props.value, props.index, props.guess, word);
 
     if (result === 'CORRECT') {
       return (

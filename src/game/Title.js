@@ -1,9 +1,19 @@
 import './Title.css';
+import ShareButton from './ShareButton';
 
-function Title() {
+function Title(props) {
+  if (!props.share) {
+    return (
+      <div className="Title">
+        DALBLE
+        <hr/>
+      </div>
+    );
+  }
+
   return (
     <div className="Title">
-      DALBLE
+      <ShareButton/>
       <hr/>
     </div>
   );

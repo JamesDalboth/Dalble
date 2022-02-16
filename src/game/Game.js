@@ -137,29 +137,6 @@ function Game() {
     );
   }
 
-  if (state.puzzle.word === 'THE') {
-    const generator = seedrandom(dateStr + "whoops");
-    const randomNumber = Math.floor(generator() * state.words.answers.length);
-    const startState = {
-      puzzle: {
-        guesses: [],
-        currentGuess: [],
-        word: state.words.answers[randomNumber].toUpperCase(),
-        letters: {
-          incorrect: [],
-          correct: []
-        }
-      },
-      words: state.words,
-      stats: {
-        lastDate: dateStr,
-        fail: state.stats.fail - 1,
-        success: state.stats.success
-      }
-    };
-    setState(startState);
-  }
-
   // Setup today
   if (dateStr !== state.stats.lastDate && state.words.guesses.length !== 0 && state.words.answers.length !== 0) {
     console.log("Setting up puzzle for today...");
@@ -211,7 +188,7 @@ function Game() {
     return (
       <GameContext.Provider value={{ state, setState }}>
         <div className="Game">
-            <Title/>
+            <Title share={true}/>
             {guesses.map((guess, i) => {
                 return <Line guess={guess} complete={true} key={i}/>
             })}
@@ -228,7 +205,7 @@ function Game() {
   return (
     <GameContext.Provider value={{ state, setState }}>
       <div className="Game">
-          <Title/>
+          <Title share={false}/>
           {guesses.map((guess, i) => {
               return <Line guess={guess} complete={true} key={i}/>
           })}

@@ -32,6 +32,7 @@ function Stats() {
   }
 
   const percCorrect = totalCorrect * 100 / (totalCorrect + state.stats.fail);
+  const percRounded = Math.round((percCorrect + Number.EPSILON) * 100) / 100;
 
   var d = new Date();
   d.setHours(24,0,0,0);
@@ -72,7 +73,7 @@ function Stats() {
     <div className="Stats">
       <div className="Count"><Countdown date={d} renderer={renderer}/> {" NEXT DALBLE || LAST WORD WAS " + state.puzzle.word}</div>
       <hr/>
-      <div className="Perc">{"WIN % - " + percCorrect + " || TOTAL PLAYED - " + (totalCorrect + state.stats.fail)}</div>
+      <div className="Perc">{"WIN % - " + percRounded + "% || TOTAL PLAYED - " + (totalCorrect + state.stats.fail)}</div>
       <hr/>
       <div className="BarTitle">GUESS DISTRIBUTION</div>
       <div className="Bar"><Bar data={data} options={barOptions}/></div>

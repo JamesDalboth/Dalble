@@ -1,8 +1,8 @@
 .Title {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   height: 5vh;
-  margin: 1vh;
+  margin: 2vh;
   font-family: MyFont;
   flex-direction: column;
 }
