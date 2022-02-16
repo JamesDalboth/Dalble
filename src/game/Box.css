@@ -3,8 +3,8 @@
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   width: 8.6vh;
-  max-width: 14vw;
-  max-height: 14vw;
+  max-width: 13.5vw;
+  max-height: 13.5vw;
   height: 8.6vh;
   margin: 0.2vh;
   border: solid #3a3a3c;
@@ -17,42 +17,42 @@
 
 .Box-Correct {
   width: 8.6vh;
-  max-width: 14vw;
-  max-height: 14vw;
+  max-width: 13.5vw;
+  max-height: 13.5vw;
   height: 8.6vh;
   margin: 0.2vh;
   display: flex;
   text-align: center;
   justify-content: center;
-  line-height: 9.5vh;
+  line-height: 8.6vh;
   background-color: #538d4e;
   font-family: MyFont;
 }
 
 .Box-Incorrect {
   width: 8.6vh;
-  max-width: 14vw;
-  max-height: 14vw;
+  max-width: 13.5vw;
+  max-height: 13.5vw;
   height: 8.6vh;
   margin: 0.2vh;
   display: flex;
   text-align: center;
   justify-content: center;
-  line-height: 9.5vh;
+  line-height: 8.6vh;
   background-color: #3a3a3c;
   font-family: MyFont;
 }
 
 .Box-Miss {
   width: 8.6vh;
-  max-width: 14vw;
-  max-height: 14vw;
+  max-width: 13.5vw;
+  max-height: 13.5vw;
   height: 8.6vh;
   margin: 0.2vh;
   display: flex;
   text-align: center;
   justify-content: center;
-  line-height: 9.5vh;
+  line-height: 8.6vh;
   background-color: #b59f3b;
   font-family: MyFont;
 }
