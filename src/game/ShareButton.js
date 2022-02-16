@@ -21,7 +21,12 @@ const handleOnClick = (guesses, word, date) => {
     res += '\n';
   }
 
-  navigator.clipboard.writeText(res);
+  if ('clipboard' in navigator) {
+    navigator.clipboard.writeText(res);
+  } else {
+    document.execCommand('copy', true, res);
+  }
+
   NotificationManager.info('Results copied to clipboard!', 'Share with friends!');
 };
 
