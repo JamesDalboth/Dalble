@@ -21,7 +21,7 @@ const handleOnClick = (guesses, word, date) => {
     res += '\n';
   }
 
-  if ('clipboard' in navigator) {
+  if ('clipboard' in navigator && window.isSecureContext) {
     navigator.clipboard.writeText(res);
   } else {
     document.execCommand('copy', true, res);
