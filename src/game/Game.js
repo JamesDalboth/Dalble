@@ -162,6 +162,31 @@ function Game() {
     setState(startState);
   }
 
+  // GJ rollback
+  if (String(state.puzzle.guesses[0]) === String(['G', 'R', 'U', 'N', 'T']) && String(state.puzzle.guesses[5]) === String(['B', 'E', 'A', 'C', 'H'])) {
+    console.log("Setting up puzzle for today... + GJ Rollback");
+    const generator = seedrandom(dateStr + "GJ");
+    const randomNumber = Math.floor(generator() * state.words.answers.length);
+    const startState = {
+      puzzle: {
+        guesses: [],
+        currentGuess: [],
+        word: state.words.answers[randomNumber].toUpperCase(),
+        letters: {
+          incorrect: [],
+          correct: []
+        }
+      },
+      words: state.words,
+      stats: {
+        lastDate: dateStr,
+        fail: state.stats.fail - 1,
+        success: state.stats.success
+      }
+    };
+    setState(startState);
+  }
+
   const puzzleInfo = state.puzzle;
   const guesses = puzzleInfo.guesses;
   const noGuesses = guesses.length;
