@@ -5,21 +5,36 @@ import { colour } from './Util.js';
 import { GameContext } from './Game';
 
 const handleOnClick = (guesses, word, date) => {
-  var res = 'Dalble ' + date + ' ' + guesses.length + '/6\n';
+  const head = 'Dalble ' + date + ' ';
+  var body = '';
+
+  var solved = false;
 
   for (const guess of guesses) {
+    var correctGuess = true;
     for (var i = 0; i < 5; i++) {
       const col = colour(guess[i], i, guess, word);
       if (col === 'CORRECT') {
-        res += '🟩';
+        body += '🟩';
       } else if (col === 'INCORRECT') {
-        res += '⬛';
+        body += '⬛';
+        correctGuess = false;
       } else {
-        res += '🟨';
+        body += '🟨';
+        correctGuess = false;
       }
     }
-    res += '\n';
+    solved = solved || correctGuess;
+    body += '\n';
   }
+
+  if (solved) {
+    head = head + guesses.length;
+  } else {
+    head = head + "X";
+  }
+
+  const res = head + '/6\n' + body;
 
   if ('clipboard' in navigator && window.isSecureContext) {
     navigator.clipboard.writeText(res);
