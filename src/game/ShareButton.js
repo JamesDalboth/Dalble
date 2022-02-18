@@ -5,7 +5,7 @@ import { colour } from './Util.js';
 import { GameContext } from './Game';
 
 const handleOnClick = (guesses, word, date) => {
-  const head = 'Dalble ' + date + ' ';
+  var head = 'Dalble ' + date + ' ';
   var body = '';
 
   var solved = false;
