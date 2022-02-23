@@ -5,9 +5,12 @@ export const colour = (letter, index, guess, word)  => {
 
   var word_letters = String(word);
   var guess_letters = "";
-  for (var g in guess) {
+  for (var g of guess) {
     guess_letters += g;
   }
+
+  console.log(word_letters);
+  console.log(guess_letters);
 
   // Remove precise letters
   for (var i = 0; i < 6; i++) {
@@ -18,6 +21,8 @@ export const colour = (letter, index, guess, word)  => {
         guess_letters.slice(i + 1, guess_letters.length);
     }
   }
+
+  console.log(word_letters);
 
   for (var i = 0; i < index; i++) {
     const ind = word_letters.indexOf(guess[i]);
