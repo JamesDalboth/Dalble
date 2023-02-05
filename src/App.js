@@ -7,7 +7,6 @@ function App() {
       <header className="App-header">
         <Game/>
       </header>
-
     </div>
   );
 }
