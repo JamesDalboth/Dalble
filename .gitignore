@@ -12,6 +12,14 @@ package-lock.json
 # production
 /build
 
+# npm
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Idea
+/.idea
+
 # misc
 .DS_Store
 .env.local
@@ -19,6 +27,4 @@ package-lock.json
 .env.test.local
 .env.production.local
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+
