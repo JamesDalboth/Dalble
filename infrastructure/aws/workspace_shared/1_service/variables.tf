@@ -18,10 +18,6 @@ variable "region" {
   type        = string
 }
 
-variable "profile" {
-  description = "The AWS account name"
-}
-
 variable "deployment_version" {
   description = "Deployment docker version, defaults latest"
   default = "latest"
