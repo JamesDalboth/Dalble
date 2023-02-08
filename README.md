@@ -31,3 +31,38 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+## Docker
+
+You can use docker to build an image using the following command
+
+```
+docker build . -t jamesdalboth/dalble
+```
+
+And you can use docker to run a container using the following command
+
+```
+docker run -p 8080:8080 jamesdalboth/dalble
+```
+
+To publish docker images, first find the latest version, and tag the new image with an incremented value and latest
+
+```
+docker build . -t jamesdalboth/dalble:latest -t jamesdalboth/dalble:<latest-version>
+docker push jamesdalboth/dalble -a
+```
+
+## Terraform
+
+We use terraform version 1.3.7. You can run `tfswitch 1.3.7`.
+
+You can run the below to build the terraform service
+
+```
+(
+cd infrastructure/aws/workspace_shared/1_service
+terraform init -reconfigure -backend-config=../../tfvars/production/us-east-1/service.tfbackend
+terraform apply -auto-approve -var-file=../../tfvars/production/us-east-1/terraform.tfvars
+)
+```
+

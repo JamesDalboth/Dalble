@@ -1,8 +1,7 @@
 {
-  "name": "dable",
-  "version": "0.1.0",
+  "name": "dalble",
+  "version": "0.3.0",
   "private": true,
-  "homepage": "http://jamesdalboth.github.io/dalble",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
