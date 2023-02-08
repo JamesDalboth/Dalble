@@ -6,9 +6,9 @@ pipelines:
           image: node:16
           script:
             - npm version minor
-            - git push --tags
+            - git push -f
             - docker login -u $DOCKER_USER -p $DOCKER_PASS
-            - docker build . -f Dockerfile.prod -t jamesdalboth/dalble:$(node -p "require('./package.json').version") jamesdalboth/dalble:latest
+            - docker build . -f Dockerfile.prod -t jamesdalboth/dalble:$(node -p "require('./package.json').version") -t jamesdalboth/dalble:latest
             - docker push jamesdalboth/dalble -a
           services:
             - docker
