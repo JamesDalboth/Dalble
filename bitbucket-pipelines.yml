@@ -1,0 +1,21 @@
+image: node:16
+pipelines:
+  custom:
+    build release:
+    - step:
+        script:
+          - docker login -u $DOCKER_USER -p $DOCKER_PASS
+          - docker build . -f Dockerfile.prod -t jamesdalboth/dalble:$(node -p "require('./package.json').version")
+          - docker push jamesdalboth/dalble -a
+        services:
+          - docker
+  branches:
+    main:
+      - step:
+          script:
+            - npm version minor
+            - docker login -u $DOCKER_USER -p $DOCKER_PASS
+            - docker build . -f Dockerfile.prod -t jamesdalboth/dalble:$(node -p "require('./package.json').version")
+            - docker push jamesdalboth/dalble -a
+          services:
+            - docker

@@ -48,7 +48,7 @@ docker run -p 8080:8080 jamesdalboth/dalble
 To publish docker images, first find the latest version, and tag the new image with an incremented value and latest
 
 ```
-docker build . -t jamesdalboth/dalble:latest -t jamesdalboth/dalble:<latest-version>
+docker build . -f Dockerfile.prod -t jamesdalboth/dalble:latest -t jamesdalboth/dalble:<latest-version>
 docker push jamesdalboth/dalble -a
 ```
 
@@ -56,13 +56,6 @@ docker push jamesdalboth/dalble -a
 
 We use terraform version 1.3.7. You can run `tfswitch 1.3.7`.
 
-You can run the below to build the terraform service
+You can use `./scripts/plan.sh --version=<version>` to plan a deploy. 
 
-```
-(
-cd infrastructure/aws/workspace_shared/1_service
-terraform init -reconfigure -backend-config=../../tfvars/production/us-east-1/service.tfbackend
-terraform apply -auto-approve -var-file=../../tfvars/production/us-east-1/terraform.tfvars
-)
-```
-
+And you can use `./scripts/apply.sh --version=<version>` to apply a deploy (`--approve` for auto-approve)
