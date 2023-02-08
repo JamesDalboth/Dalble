@@ -24,4 +24,4 @@ pipelines:
             - cat set_env.sh
             - source set_env.sh
             - echo $VERSION
-            - /bin/sh ./scripts/apply.sh --approve --version $VERSION
+            - /bin/bash ./scripts/apply.sh --approve --version $VERSION
