@@ -21,5 +21,4 @@ pipelines:
           script:
             - source set_env.sh
             - apk add bash
-            - /bin/bash ./scripts/plan.sh --version $VERSION
-            - /bin/bash ./scripts/apply.sh --approve --version $VERSION
+            - /bin/bash ./scripts/apply.sh --version $VERSION --approve=true
