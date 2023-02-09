@@ -23,7 +23,7 @@ ChartJS.register(
 );
 
 function Stats() {
-  const { state, setState } = useContext(GameContext);
+  const { state } = useContext(GameContext);
 
   var totalCorrect = 0;
 

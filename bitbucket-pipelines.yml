@@ -5,6 +5,8 @@ pipelines:
       - step:
           image: node:16
           script:
+            - npm install
+            - npm run test
             - npm version minor
             - VERSION="$(node -p "require('./package.json').version")"
             - git push -f
@@ -22,3 +24,12 @@ pipelines:
             - source set_env.sh
             - apk add bash
             - /bin/bash ./scripts/apply.sh --version $VERSION --approve=true
+    build:
+      - step:
+          image: node:16
+          script:
+            - npm install
+            - npm run test
+            - docker build . -f Dockerfile.prod
+          services:
+            - docker

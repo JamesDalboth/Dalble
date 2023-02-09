@@ -1,47 +1,23 @@
 import { useContext } from 'react';
 import './Share.css';
 import { NotificationManager } from 'react-notifications';
-import { colour } from './Util.js';
+import { accuracy, CORRECT, INCORRECT, MISS } from './util/accuracy.js';
+import { GUESS_SIZE } from './util/consts.js';
 import { GameContext } from './Game';
 
-const handleOnClick = (guesses, word, date) => {
-  var head = 'Dalble ' + date + ' ';
-  var body = '';
+const GREEN_SQUARE = '🟩';
+const BLACK_SQUARE = '⬛';
+const YELLOW_SQUARE = '🟨';
 
-  var solved = false;
-
-  for (const guess of guesses) {
-    var correctGuess = true;
-    for (var i = 0; i < 5; i++) {
-      const col = colour(guess[i], i, guess, word);
-      if (col === 'CORRECT') {
-        body += '🟩';
-      } else if (col === 'INCORRECT') {
-        body += '⬛';
-        correctGuess = false;
-      } else {
-        body += '🟨';
-        correctGuess = false;
-      }
-    }
-    solved = solved || correctGuess;
-    body += '\n';
-  }
-
-  if (solved) {
-    head = head + guesses.length;
-  } else {
-    head = head + "X";
-  }
-
-  const res = head + '/6\n' + body;
-
+/**
+    Copies text to the clipboard, using the clipboard tool if it exists or a backup method if not.
+**/
+const copyToClipboard = (text) => {
   if ('clipboard' in navigator && window.isSecureContext) {
-    navigator.clipboard.writeText(res);
+    navigator.clipboard.writeText(text);
   } else {
-    console.log("Backup copy");
     let textArea = document.createElement("textarea");
-    textArea.value = res;
+    textArea.value = text;
     textArea.style.position = "fixed";
     textArea.style.left = "-999999px";
     textArea.style.right = "-999999px";
@@ -53,10 +29,58 @@ const handleOnClick = (guesses, word, date) => {
   }
 
   NotificationManager.info('Results copied to clipboard!', 'Share with friends!');
+}
+
+/**
+  For a given set of guesses, word and date.
+  Generate spoiler free text that can be shared with friends.
+
+  e.g.
+  Dalble 09/02/2023 3/6
+  ⬛⬛⬛⬛⬛
+  🟨⬛⬛⬛⬛
+  🟩🟩🟩🟩🟩
+**/
+const handleOnClick = (guesses, word, date) => {
+  const head = 'Dalble ' + date + ' ';
+  var body = '';
+
+  var solved = false;
+
+  for (const guess of guesses) {
+    var correctGuess = true;
+    for (var i = 0; i < GUESS_SIZE; i++) {
+      const acc = accuracy(i, guess, word);
+      if (acc === CORRECT) {
+        body += GREEN_SQUARE;
+      } else if (acc === INCORRECT) {
+        body += BLACK_SQUARE;
+        correctGuess = false;
+      } else if (acc === MISS) {
+        body += YELLOW_SQUARE;
+        correctGuess = false;
+      }
+    }
+    solved = solved || correctGuess;
+    body += '\n';
+  }
+
+  var noGuessesTillSuccess = "X";
+  if (solved) {
+    noGuessesTillSuccess = guesses.length;
+  }
+  noGuessesTillSuccess = noGuessesTillSuccess + '/6'
+
+  const res = head + noGuessesTillSuccess + '\n' + body;
+  copyToClipboard(res);
 };
 
+/**
+  Generates the share button.
+  When clicked copies text to the clipboard which contains spoiler free guess info.
+**/
 function ShareButton() {
-  const { state, setState } = useContext(GameContext);
+  const { state } = useContext(GameContext);
 
   const puzzleInfo = state.puzzle;
   const guesses = puzzleInfo.guesses;

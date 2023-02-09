@@ -1,17 +1,19 @@
 import React, { createContext, useState } from 'react';
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+import { NotificationContainer } from 'react-notifications';
 
 import 'react-notifications/lib/notifications.css';
 
-import answers_raw from './words.txt';
-import guesses_raw from './guesses.txt';
+import answers_raw from './words/answers.txt';
+import guesses_raw from './words/guesses.txt';
 
 import './Game.css';
 
-import Line from './Line';
-import Keyboard from './Keyboard';
+import Line from './grid/Line';
+import Keyboard from './keyboard/Keyboard';
 import Title from './Title';
 import Stats from './Stats';
+
+import { MAX_NO_GUESSES } from './util/consts.js';
 
 const seedrandom = require('seedrandom');
 
@@ -54,40 +56,6 @@ function useStickyState(defaultValue, key) {
 function Game() {
   const [state, setState] = useStickyState(defaultState, "dalble");
 
-  const dateStr = new Date().toLocaleDateString("en-GB", { // you can use undefined as first argument
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  });
-
-  console.log(dateStr);
-
-  // Migrate old stats
-  if (state.lastDate !== undefined && state.stats.lastDate === undefined) {
-    const newState = {
-      puzzle: {
-        guesses: state.guesses,
-        currentGuess: state.currentGuess,
-        word: state.word,
-        letters: {
-          incorrect: state.incorrectLetters,
-          correct: state.correctLetters
-        }
-      },
-      words: {
-        guesses: [],
-        answers: [],
-      },
-      stats: {
-        lastDate: state.lastDate,
-        fail: state.stats.fail,
-        success: state.stats.success
-      }
-    }
-    setState(newState);
-    return;
-  }
-
   // Download valid guess words
   if (state.words.guesses.length === 0) {
     console.log("Downloading guesses...");
@@ -107,7 +75,7 @@ function Game() {
       });
   }
 
-  // Download valid answer words
+  // Download valid answer words. Guesses must be downloaded first.
   if (state.words.guesses.length > 0 && state.words.answers.length === 0) {
     console.log("Downloading answers...");
     fetch(answers_raw)
@@ -126,6 +94,7 @@ function Game() {
       });
   }
 
+  // What to render when guesses and answers are still empty.
   if (state.words.guesses.length === 0 || state.words.answers.length === 0) {
     return (
       <GameContext.Provider value={{ state, setState }}>
@@ -137,11 +106,16 @@ function Game() {
     );
   }
 
+  const dateStr = new Date().toLocaleDateString("en-GB", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+
   // Setup today
-  if (dateStr !== state.stats.lastDate && state.words.guesses.length !== 0 && state.words.answers.length !== 0) {
-    console.log("Setting up puzzle for today...");
-    const generator = seedrandom(dateStr);
-    const randomNumber = Math.floor(generator() * state.words.answers.length);
+  if (dateStr !== state.stats.lastDate) {
+    const randomNumber = Math.floor(seedrandom(dateStr)() * state.words.answers.length);
+
     const startState = {
       puzzle: {
         guesses: [],
@@ -164,21 +138,19 @@ function Game() {
 
   const puzzleInfo = state.puzzle;
   const guesses = puzzleInfo.guesses;
-  const noGuesses = guesses.length;
-  const lastGuess = guesses[noGuesses - 1];
+  const lastGuess = guesses.length > 0 ? guesses[guesses.length - 1] : [];
   const word = puzzleInfo.word;
-  var lastGuessStr = '';
+  const lastGuessStr = lastGuess.join("");
 
   var complete = false;
-  if (noGuesses === 6) {
+
+  // Failure
+  if (guesses.length === MAX_NO_GUESSES) {
     complete = true;
   }
 
-  if (noGuesses > 0) {
-    for (var i = 0; i < lastGuess.length; i++) {
-      lastGuessStr += lastGuess[i];
-    }
-
+  // Success
+  if (guesses.length > 0) {
     if (lastGuessStr === word) {
       complete = true;
     }
@@ -192,8 +164,8 @@ function Game() {
             {guesses.map((guess, i) => {
                 return <Line guess={guess} complete={true} key={i}/>
             })}
-            {[...Array(6 - noGuesses)].map((x, i) =>
-                <Line key={noGuesses + i}/>
+            {[...Array(MAX_NO_GUESSES - guesses.length)].map((x, i) =>
+                <Line key={guesses.length + i}/>
             )}
             <Stats/>
         </div>
@@ -210,8 +182,8 @@ function Game() {
               return <Line guess={guess} complete={true} key={i}/>
           })}
           <Line guess={puzzleInfo.currentGuess} complete={false}/>
-          {[...Array(5 - noGuesses)].map((x, i) =>
-              <Line key={noGuesses + i}/>
+          {[...Array(MAX_NO_GUESSES - 1 - guesses.length)].map((x, i) =>
+              <Line key={guesses.length + i}/>
           )}
           <Keyboard/>
       </div>
