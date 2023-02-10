@@ -36,8 +36,9 @@ describe("Testing Accuracy", () => {
       [4, "RRAAR", "SORRY", INCORRECT],
       [3, "TRUSS", "SORRY", MISS],
       [4, "TRUSS", "SORRY", INCORRECT],
+      [1, "ORDER", "ODDER", INCORRECT]
   ])('Letter %s index %p guess %s word %s should be %s', (index, guess, word, expected) => {
-    const result = accuracy(index, guess, word);
+    const result = accuracy(index, guess.split(""), word);
     expect(result).toBe(expected);
   });
 });

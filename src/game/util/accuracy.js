@@ -9,6 +9,12 @@ const replaceAt = (str, index, replacement) => {
 }
 
 export const accuracy = (index, guess, word)  => {
+  if (guess === undefined) {
+    guess = ""
+  } else if (guess instanceof Object) {
+    guess = guess.join("");
+  }
+
   const letter = guess[index];
 
   // If letter matches directly it's simply correct.
