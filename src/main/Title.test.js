@@ -1,6 +1,8 @@
 import { render, screen } from '@testing-library/react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "@testing-library/jest-dom";
+
 
 import Title from './Title';
 
@@ -8,7 +10,13 @@ import { GameContext } from './Game';
 
 const customRender = (ui, { providerProps, ...renderOptions }) => {
   return render(
-    <GameContext.Provider value={providerProps}>{ui}</GameContext.Provider>,
+          <BrowserRouter>
+            <Routes>
+              <Route path="*" element={
+                <GameContext.Provider value={providerProps}>{ui}</GameContext.Provider>
+              } />
+            </Routes>
+          </BrowserRouter>,
     renderOptions
   );
 };

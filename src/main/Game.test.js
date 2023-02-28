@@ -1,4 +1,5 @@
 import { render, screen, waitFor } from '@testing-library/react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "@testing-library/jest-dom";
 
@@ -71,6 +72,16 @@ class ResizeObserver {
   disconnect() {}
 }
 
+const customRender = (ui) => {
+  return render(
+          <BrowserRouter>
+            <Routes>
+              <Route path="*" element={ui} />
+            </Routes>
+          </BrowserRouter>
+  );
+};
+
 describe("Testing Game", () => {
   beforeEach(() => {
     window.localStorage.clear();
@@ -96,7 +107,7 @@ describe("Testing Game", () => {
     expectedState2.puzzle.word = "FUDGE";
     expectedState2.stats.lastDate = "09/02/2023";
 
-    render(<Game/>);
+    customRender(<Game/>);
 
     await waitFor(() => {
       expect(screen.getByText(/^DALBLE$/)).toHaveTextContent("DALBLE");
@@ -116,7 +127,7 @@ describe("Testing Game", () => {
     expectedState2.puzzle.word = "FUDGE";
     expectedState2.stats.lastDate = "09/02/2023";
 
-    render(<Game/>);
+    customRender(<Game/>);
 
     await waitFor(() => {
       expect(screen.getByText(/^DALBLE$/)).toHaveTextContent("DALBLE");
@@ -134,7 +145,7 @@ describe("Testing Game", () => {
     expectedState.puzzle.word = "FUDGE";
     expectedState.stats.lastDate = "09/02/2023";
 
-    render(<Game/>);
+    customRender(<Game/>);
 
     await waitFor(() => {
       expect(screen.getByText(/^DALBLE$/)).toHaveTextContent("DALBLE");
@@ -149,7 +160,7 @@ describe("Testing Game", () => {
     state.stats.lastDate = "09/02/2023";
     setLocalStorage(state);
 
-    render(<Game/>);
+    customRender(<Game/>);
 
     await waitFor(() => {
       expect(screen.getByText(/^DALBLE$/)).toHaveTextContent("DALBLE");
@@ -166,7 +177,7 @@ describe("Testing Game", () => {
     state.stats.lastDate = "09/02/2023";
     setLocalStorage(state);
 
-    render(<Game/>);
+    customRender(<Game/>);
 
     const expectedState = JSON.parse(JSON.stringify(state));
     expectedState.puzzle.letters.incorrect = "J";
@@ -199,7 +210,7 @@ describe("Testing Game", () => {
     state.stats.lastDate = "09/02/2023";
     setLocalStorage(state);
 
-    render(<Game/>);
+    customRender(<Game/>);
 
     const expectedState = JSON.parse(JSON.stringify(state));
     expectedState.puzzle.letters.incorrect = "A";
@@ -219,7 +230,7 @@ describe("Testing Game", () => {
     state.stats.lastDate = "09/02/2023";
     setLocalStorage(state);
 
-    render(<Game/>);
+    customRender(<Game/>);
 
     const expectedState = JSON.parse(JSON.stringify(state));
     expectedState.puzzle.letters.incorrect = "A";

@@ -1,0 +1,8 @@
+.Switch {
+  background-color: #8ab4f8;
+  border-radius: 5px;
+  padding: 1vh;
+  flex: 1;
+  margin-right: 20px;
+  margin-left: 20px;
+}

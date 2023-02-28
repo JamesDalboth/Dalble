@@ -1,0 +1,7 @@
+.About {
+  display: flex;
+  justify-content: center;
+  margin: 2vh;
+  font-family: MyFont;
+  flex-direction: column;
+}

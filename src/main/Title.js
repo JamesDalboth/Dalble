@@ -1,5 +1,6 @@
 import './Title.css';
 import ShareButton from './ShareButton';
+import Switch from './navigate/Switch';
 
 /**
   Generates the title section. There are 2 cases.
@@ -14,9 +15,11 @@ function Title(props) {
   }
 
   return (
-    <div className="Title">
-      {toDisplay}
-      <hr/>
+    <div>
+      <div className="Title">
+        <Switch path="/about" display="About"/>
+        {toDisplay}
+      </div>
     </div>
   );
 }

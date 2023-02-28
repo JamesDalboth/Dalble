@@ -1,10 +1,11 @@
 .Title {
   display: flex;
+  width: 90%;
   justify-content: center;
+  align-items: center;
   height: 5vh;
   margin: 2vh;
   font-family: MyFont;
-  flex-direction: column;
 }
 
 hr {
