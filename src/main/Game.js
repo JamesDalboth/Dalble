@@ -14,8 +14,7 @@ import Title from './Title';
 import Stats from './Stats';
 
 import { MAX_NO_GUESSES } from './util/consts.js';
-
-const seedrandom = require('seedrandom');
+import { pick } from './util/words.js';
 
 export const GameContext = createContext();
 
@@ -106,7 +105,8 @@ function Game() {
     );
   }
 
-  const dateStr = new Date().toLocaleDateString("en-GB", {
+  const date = new Date();
+  const dateStr = date.toLocaleDateString("en-GB", {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
@@ -114,13 +114,11 @@ function Game() {
 
   // Setup today
   if (dateStr !== state.stats.lastDate) {
-    const randomNumber = Math.floor(seedrandom(dateStr)() * state.words.answers.length);
-
     const startState = {
       puzzle: {
         guesses: [],
         currentGuess: [],
-        word: state.words.answers[randomNumber].toUpperCase(),
+        word: pick(state.words.answers, date),
         letters: {
           incorrect: [],
           correct: []
