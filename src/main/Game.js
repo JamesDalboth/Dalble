@@ -118,7 +118,7 @@ function Game() {
       puzzle: {
         guesses: [],
         currentGuess: [],
-        word: pick(state.words.answers, date),
+        word: pick(state.words.answers, date).toUpperCase(),
         letters: {
           incorrect: [],
           correct: []
