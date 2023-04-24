@@ -57,5 +57,17 @@ describe("Testing pick", () => {
         expect(w31).toEqual(w32);
         expect(w41).toEqual(w42);
     });
+    test('Time of day makes no difference', () => {
+        const d1 = new Date('2023-09-19 01:00:00');
+        const d2 = new Date('2023-09-19 23:00:00');
+
+        console.log(d1);
+        console.log(d2);
+
+        const w1 = pick(testWords, d1);
+        const w2 = pick(testWords, d2);
+
+        expect(w2).toBe(w1);
+    })
 });
 

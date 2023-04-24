@@ -12,5 +12,5 @@ export const pick = (words, date)  => {
 }
 
 const daysBetween = (date1, date2) => {
-    return Math.round((date1 - date2) / (1000 * 60 * 60 * 24));
+    return Math.floor((date1 - date2) / (1000 * 60 * 60 * 24));
 }
