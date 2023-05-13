@@ -4,8 +4,8 @@ resource "aws_lightsail_certificate" "certificate" {
   subject_alternative_names = ["dalble.dalboth.com"]
 
   tags = {
-    env = var.env
-    region = var.region
+    env     = var.env
+    region  = var.region
     product = var.product
   }
 }
@@ -20,4 +20,3 @@ resource "aws_lightsail_domain_entry" "domain_entry" {
   type        = "CNAME"
   target      = replace(replace(aws_lightsail_container_service.container_service.url, "https://", ""), "/", "")
 }
-

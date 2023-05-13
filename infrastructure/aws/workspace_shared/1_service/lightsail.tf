@@ -1,5 +1,5 @@
 resource "aws_lightsail_container_service" "container_service" {
-  depends_on = [aws_lightsail_certificate.certificate]
+  depends_on  = [aws_lightsail_certificate.certificate]
   name        = "${var.env}-${var.region}-${var.product}-lightsail-container-service"
   power       = "micro"
   scale       = 1
@@ -15,8 +15,8 @@ resource "aws_lightsail_container_service" "container_service" {
   }
 
   tags = {
-    env = var.env
-    region = var.region
+    env     = var.env
+    region  = var.region
     product = var.product
   }
 }
