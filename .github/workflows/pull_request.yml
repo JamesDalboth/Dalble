@@ -24,6 +24,8 @@ jobs:
           node-version: "16"
       - run: npm install
       - run: npm run test
+      - name: Docker build
+        run: docker build . -f Dockerfile.prod -t jamesdalboth/dalble:snapshot
       - name: Install Ruby
         uses: ruby/setup-ruby@v1
         with:
