@@ -1,3 +1,10 @@
+# [0.30.0](https://github.com/JamesDalboth/Dalble/compare/v0.29.0...v0.30.0) (2023-05-13)
+
+
+### Features
+
+* Add pre-commit ([dc19a56](https://github.com/JamesDalboth/Dalble/commit/dc19a56e315c024c86da232ea0ee5d9a766804d2))
+
 # [0.29.0](https://github.com/JamesDalboth/Dalble/compare/v0.28.0...v0.29.0) (2023-05-13)
 
 
