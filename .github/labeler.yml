@@ -1,0 +1,16 @@
+documentation:
+- "docs/**"
+- "**/*.md"
+- "*.md"
+github-config: .github/**
+pre-commit: .pre-commit-config.yml
+release-config: .releaserc.yml
+repo-config:
+- "*"
+- ".*"
+terraform:
+- "infrastructure/**"
+- "**/*.tf"
+app:
+- "public/**"
+- "src/**"
