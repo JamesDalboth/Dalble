@@ -105,7 +105,7 @@ function Game() {
     );
   }
 
-  const date = new Date();
+  const date = new Date(Date.now());
   const dateStr = date.toLocaleDateString("en-GB", {
     year: "numeric",
     month: "2-digit",

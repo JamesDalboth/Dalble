@@ -1,0 +1,20 @@
+name: CI
+
+on:
+  - pull_request
+
+jobs:
+  ci:
+    name: CI
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.1.0
+      - name: Setup Node
+        uses: actions/setup-node@v3.5.1
+        with:
+          node-version: "16"
+      - run: npm install
+      - run: npm run test
+      - name: Docker build
+        run: docker build . -f Dockerfile.prod -t jamesdalboth/dalble:snapshot

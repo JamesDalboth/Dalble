@@ -1,0 +1,36 @@
+name: Deploy App
+
+on:
+  workflow_dispatch:
+
+jobs:
+  ci:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.1.0
+        with:
+          fetch-depth: '0'
+      - name: Setup Node
+        uses: actions/setup-node@v3.5.1
+        with:
+          node-version: "16"
+      - run: npm install
+      - run: npm run test
+      - name: Docker login
+        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASS }}
+      - name: Docker build
+        run: docker build . -f Dockerfile.prod -t jamesdalboth/dalble:latest -t jamesdalboth/dalble:$(git describe --tags)
+      - name: Docker push
+        run: docker push jamesdalboth/dalble -a
+      - name: TF init
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.3.7
+      - name: Apply
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: 'eu-west-1'
+        run: ./scripts/apply.sh --approve=true

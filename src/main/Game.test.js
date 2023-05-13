@@ -92,7 +92,7 @@ describe("Testing Game", () => {
       })
     });
 
-    global.Date.prototype.toLocaleDateString = jest.fn(function(locale, date) {return "09/02/2023"});
+    global.Date.now = jest.fn(function() {return Date.parse("02/09/2023")});
   });
 
   test('Renders empty game', async () => {
@@ -104,7 +104,7 @@ describe("Testing Game", () => {
 
     const expectedState2 = JSON.parse(JSON.stringify(expectedState));
     expectedState2.words.answers = ["JUDGE", "FUDGE", "EARTH"];
-    expectedState2.puzzle.word = "EARTH";
+    expectedState2.puzzle.word = "JUDGE";
     expectedState2.stats.lastDate = "09/02/2023";
 
     customRender(<Game/>);
@@ -124,7 +124,7 @@ describe("Testing Game", () => {
 
     const expectedState2 = JSON.parse(JSON.stringify(expectedState));
     expectedState2.words.answers = ["JUDGE", "FUDGE", "EARTH"]
-    expectedState2.puzzle.word = "EARTH";
+    expectedState2.puzzle.word = "JUDGE";
     expectedState2.stats.lastDate = "09/02/2023";
 
     customRender(<Game/>);
@@ -142,7 +142,7 @@ describe("Testing Game", () => {
     setLocalStorage(state);
 
     const expectedState = JSON.parse(JSON.stringify(state));
-    expectedState.puzzle.word = "EARTH";
+    expectedState.puzzle.word = "JUDGE";
     expectedState.stats.lastDate = "09/02/2023";
 
     customRender(<Game/>);
