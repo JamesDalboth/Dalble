@@ -1,0 +1,14 @@
+name: Pull Request
+
+on:
+  - pull_request
+
+jobs:
+  labeler:
+    name: PR Labeler
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/labeler@v4.0.2
+        with:
+          configuration-path: .github/labeler.yml
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
