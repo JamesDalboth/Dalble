@@ -20,5 +20,5 @@ variable "region" {
 
 variable "deployment_version" {
   description = "Deployment docker version, defaults latest"
-  default = "latest"
+  default     = "latest"
 }
