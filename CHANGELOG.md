@@ -1,3 +1,10 @@
+## [0.32.1](https://github.com/JamesDalboth/Dalble/compare/v0.32.0...v0.32.1) (2023-05-13)
+
+
+### Bug Fixes
+
+* bump package.json ([cc8295a](https://github.com/JamesDalboth/Dalble/commit/cc8295a11e48bef0ba8eb1c218a07d774902e7ec))
+
 # [0.32.0](https://github.com/JamesDalboth/Dalble/compare/v0.31.0...v0.32.0) (2023-05-13)
 
 
