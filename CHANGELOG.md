@@ -1,3 +1,10 @@
+# [0.29.0](https://github.com/JamesDalboth/Dalble/compare/v0.28.0...v0.29.0) (2023-05-13)
+
+
+### Features
+
+* Add danger files ([4c6b308](https://github.com/JamesDalboth/Dalble/commit/4c6b30897dd8d59a263e34f70ed98a2535180b3a))
+
 # [0.28.0](https://github.com/JamesDalboth/Dalble/compare/v0.27.0...v0.28.0) (2023-05-13)
 
 
