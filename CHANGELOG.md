@@ -1,3 +1,10 @@
+# [0.31.0](https://github.com/JamesDalboth/Dalble/compare/v0.30.0...v0.31.0) (2023-05-13)
+
+
+### Features
+
+* Add terraform ci ([16615cc](https://github.com/JamesDalboth/Dalble/commit/16615cca4fdfdb387c9a9f1a7e4e2fcbd5018c38))
+
 # [0.30.0](https://github.com/JamesDalboth/Dalble/compare/v0.29.0...v0.30.0) (2023-05-13)
 
 
