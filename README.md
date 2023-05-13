@@ -56,6 +56,19 @@ docker push jamesdalboth/dalble -a
 
 We use terraform version 1.3.7. You can run `tfswitch 1.3.7`.
 
-You can use `./scripts/plan.sh --version=<version>` to plan a deploy. 
+You can use `./scripts/plan.sh --version=<version>` to plan a deploy.
 
 And you can use `./scripts/apply.sh --version=<version>` to apply a deploy (`--approve` for auto-approve)
+
+## Pre-Commit
+Once you have checked out the repo to your local machine, please install the git hooks for pre-commmit by running the following command:
+
+```
+pre-commit install
+```
+
+Also, install the pre-commit hook for conventional commits:
+
+```
+pre-commit install --hook-type commit-msg
+```
