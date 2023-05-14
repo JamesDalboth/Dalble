@@ -1,3 +1,22 @@
+# [1.0.0](https://github.com/JamesDalboth/Dalble/compare/v0.32.0...v1.0.0) (2023-05-14)
+
+
+### Bug Fixes
+
+* bump package.json ([cc8295a](https://github.com/JamesDalboth/Dalble/commit/cc8295a11e48bef0ba8eb1c218a07d774902e7ec))
+
+
+### Features
+
+* fix release issues ([756c440](https://github.com/JamesDalboth/Dalble/commit/756c44004bd5013261a775dceec7b3d3d962fbff))
+
+
+### BREAKING CHANGES
+
+* v1 release
+
+[release/fix]
+
 ## [0.32.1](https://github.com/JamesDalboth/Dalble/compare/v0.32.0...v0.32.1) (2023-05-14)
 
 
