@@ -38,7 +38,7 @@ def too_many_changed_lines?(commit)
 end
 
 def match_semantic_commit(text)
-  text.match(/^(?<type>\w+)!?(?:\((?<scope>.+?)\))?:(?<description>.+?)$/)
+  text.match(/^(?<type>\w+)(?:\((?<scope>.+?)\))?:(?<description>.+?)$/)
 end
 
 def add_no_release_markdown
@@ -146,8 +146,6 @@ def lint_commit(commit)
 
     failures = true
   elsif details&.match(/BREAKING CHANGE:/)
-    release = MAJOR_RELEASE
-  elsif subject&.match(/!/)
     release = MAJOR_RELEASE
   elsif semantic_commit[:type] == 'feat'
     release = MINOR_RELEASE
