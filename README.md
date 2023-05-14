@@ -1,8 +1,15 @@
-# Dalble
+<img src="https://img.shields.io/github/checks-status/JamesDalboth/Dalble/main?style=flat-square">
+<img src="https://img.shields.io/github/v/release/jamesdalboth/dalble?style=flat-square"/>
 
-Personal WORDLE clone written in react and hosted in AWS.
+# <center> Dalble</center>
+
+<center><img src="./public/logo.png" width="30%"></center>
+
+Personal WORDLE clone written in react and hosted in AWS. [Try it out](https://dalble.dalboth.com)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+ <center><img src="./public/dalble.png" width="30%"></center>
 
 ## Available Scripts
 
