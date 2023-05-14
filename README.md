@@ -1,5 +1,4 @@
-<img src="https://img.shields.io/github/checks-status/JamesDalboth/Dalble/main?style=flat-square">
-<img src="https://img.shields.io/github/v/release/jamesdalboth/dalble?style=flat-square"/>
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/jamesdalboth/dalble?style=flat-square)
 
 # <center> Dalble</center>
 
