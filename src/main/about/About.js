@@ -9,9 +9,9 @@ function About(props) {
 
   const about = <p>This is a wordle clone (with a few tweaks) written by James Dalboth, hence Dalb-le.</p>;
 
-  const tech = <p>Written in React, Hosted in AWS Lightsail. Deployed via terraform using a docker container.</p>
+  const tech = <p>Written in React, hosted by s3 and cloudfront (Used to be hosted in Lightsail). Deployed via terraform using a docker container.</p>
 
-  const contactMe = <p>If you have found any bugs or wanted to contact me do so at james.dalboth@gmail.com</p>;
+  const contactMe = <p>If you have found any bugs or wanted to contact me do so at dalble@dalboth.com</p>;
 
   return (
     <div>
