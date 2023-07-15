@@ -1,7 +1,17 @@
-resource "aws_lightsail_certificate" "certificate" {
-  name                      = "dalble"
-  domain_name               = "dalboth.com"
-  subject_alternative_names = ["dalble.dalboth.com"]
+module "zones" {
+  source  = "terraform-aws-modules/route53/aws//modules/zones"
+  version = "~> 2.0"
+
+  zones = {
+    "dalboth.com" = {
+      comment = "dalboth.com"
+      tags = {
+        env     = var.env
+        region  = var.region
+        product = var.product
+      }
+    }
+  }
 
   tags = {
     env     = var.env
@@ -10,13 +20,22 @@ resource "aws_lightsail_certificate" "certificate" {
   }
 }
 
-resource "aws_lightsail_domain" "domain" {
-  domain_name = "dalboth.com"
-}
+module "records" {
+  source  = "terraform-aws-modules/route53/aws//modules/records"
+  version = "~> 2.0"
 
-resource "aws_lightsail_domain_entry" "domain_entry" {
-  domain_name = aws_lightsail_domain.domain.domain_name
-  name        = "dalble"
-  type        = "CNAME"
-  target      = replace(replace(aws_lightsail_container_service.container_service.url, "https://", ""), "/", "")
+  zone_name = module.zones.route53_zone_name["dalboth.com"]
+
+  records = [
+    {
+      name = "dalble"
+      type = "A"
+      alias = {
+        name    = module.website.cloudfront_distribution_domain_name
+        zone_id = module.website.cloudfront_distribution_hosted_zone_id
+      }
+    }
+  ]
+
+  depends_on = [module.zones]
 }

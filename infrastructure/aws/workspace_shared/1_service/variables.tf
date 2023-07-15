@@ -22,3 +22,11 @@ variable "deployment_version" {
   description = "Deployment docker version, defaults latest"
   default     = "latest"
 }
+
+variable "src_folder" {
+  description = "Location of source code to upload to s3."
+}
+
+variable "s3_folder" {
+  description = "Location in s3 for uploaded code."
+}

@@ -1,3 +1,5 @@
-env     = "prd"
-region  = "us-east-1"
-product = "dalble"
+env        = "prd"
+region     = "us-east-1"
+product    = "dalble"
+src_folder = "../../../../build"
+s3_folder  = "build"
