@@ -1,5 +1,14 @@
+resource "aws_cloudfront_function" "viewer_request" {
+  name    = "dalble-cdn-viewer-request"
+  runtime = "cloudfront-js-1.0"
+  publish = true
+  code    = file("${path.module}/viewer-request.js")
+}
+
 module "website" {
   source = "terraform-aws-modules/cloudfront/aws"
+
+  aliases = ["${var.product}.${var.domain}"]
 
   comment             = "Dalble website"
   is_ipv6_enabled     = true
@@ -32,7 +41,20 @@ module "website" {
     cached_methods  = ["GET", "HEAD"]
     compress        = true
     query_string    = false
+
+    function_association = {
+      viewer-request = {
+        function_arn = aws_cloudfront_function.viewer_request.arn
+      }
+    }
+  }
+
+  viewer_certificate = {
+    acm_certificate_arn = aws_acm_certificate.cert.arn
+    ssl_support_method  = "sni-only"
   }
 
   default_root_object = "index.html"
+
+  depends_on = [aws_acm_certificate.cert, aws_route53_record.cert_validation]
 }
