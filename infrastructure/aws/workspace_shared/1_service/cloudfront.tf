@@ -1,5 +1,5 @@
 resource "aws_cloudfront_function" "viewer_request" {
-  name    = "dalble-cdn-viewer-request"
+  name    = "${var.product}-cdn-viewer-request"
   runtime = "cloudfront-js-1.0"
   publish = true
   code    = file("${path.module}/viewer-request.js")
@@ -10,14 +10,14 @@ module "website" {
 
   aliases = ["${var.product}.${var.domain}"]
 
-  comment             = "Dalble website"
+  comment             = "${title(var.product)} website"
   is_ipv6_enabled     = true
   price_class         = "PriceClass_200"
   wait_for_deployment = false
 
   create_origin_access_identity = true
   origin_access_identities = {
-    s3 = "Access to dalble s3 bucket"
+    s3 = "Access to ${var.product} s3 bucket"
   }
   origin = {
     s3 = {
