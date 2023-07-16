@@ -1,7 +1,7 @@
-resource "aws_route53_record" "dalble" {
+resource "aws_route53_record" "record" {
   name    = var.product
   type    = "A"
-  zone_id = data.aws_route53_zone.dalble.id
+  zone_id = data.aws_route53_zone.zone_data.id
   alias {
     name                   = module.website.cloudfront_distribution_domain_name
     zone_id                = module.website.cloudfront_distribution_hosted_zone_id
@@ -39,7 +39,7 @@ resource "aws_route53_record" "cert_validation" {
 
   name    = local.dvos[count.index].resource_record_name
   type    = local.dvos[count.index].resource_record_type
-  zone_id = data.aws_route53_zone.dalble.id
+  zone_id = data.aws_route53_zone.zone_data.id
   records = [local.dvos[count.index].resource_record_value]
   ttl     = 60
 }
