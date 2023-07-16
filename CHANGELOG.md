@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/JamesDalboth/Dalble/compare/v1.1.0...v1.1.1) (2023-07-16)
+
+
+### Bug Fixes
+
+* run npm build before deploying terraform ([31c63da](https://github.com/JamesDalboth/Dalble/commit/31c63daab391f508d5fb78b7b52bf373b64e1499))
+
 # [1.1.0](https://github.com/JamesDalboth/Dalble/compare/v1.0.0...v1.1.0) (2023-07-16)
 
 
