@@ -1,3 +1,20 @@
+# [1.1.0](https://github.com/JamesDalboth/Dalble/compare/v1.0.0...v1.1.0) (2023-07-16)
+
+
+### Bug Fixes
+
+* acm validation ([616f3b5](https://github.com/JamesDalboth/Dalble/commit/616f3b5850c1be3379e2f262d72e3f882717e2fa))
+* cloudfront / react paging ([7ad347c](https://github.com/JamesDalboth/Dalble/commit/7ad347c33cdc86320e20d5d0bbbef2a3cb3750d0))
+* remove dalble and use product variable ([b8b5640](https://github.com/JamesDalboth/Dalble/commit/b8b56401a750af1cb0bbd30fc526bc5468c34713))
+
+
+### Features
+
+* fix cloudfront cert errors ([57d400b](https://github.com/JamesDalboth/Dalble/commit/57d400b7f71cd4950f9ae683fc85d98de3db2f6d))
+* Remove checkov ([e343af0](https://github.com/JamesDalboth/Dalble/commit/e343af053217d8072ce8feefaa9ddbcf1bba81bb))
+* Switch to most cost effective s3 and cloudfront server ([60af3ad](https://github.com/JamesDalboth/Dalble/commit/60af3ad1f5fed12baa6a03288eb1397a066626ab))
+* update about section ([adae371](https://github.com/JamesDalboth/Dalble/commit/adae37108dafc652c8116c275d3d184dba818121))
+
 # [1.0.0](https://github.com/JamesDalboth/Dalble/compare/v0.32.0...v1.0.0) (2023-05-14)
 
 
