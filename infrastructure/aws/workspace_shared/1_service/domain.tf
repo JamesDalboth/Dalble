@@ -1,28 +1,23 @@
-module "zones" {
-  source  = "terraform-aws-modules/route53/aws//modules/zones"
-  version = "~> 2.0"
-
-  zones = {
-    "dalboth.com" = {
-      comment = "dalboth.com"
-      tags = {
-        env     = var.env
-        region  = var.region
-        product = var.product
-      }
-    }
-  }
-
-  tags = {
-    env     = var.env
-    region  = var.region
-    product = var.product
+resource "aws_route53_record" "dalble" {
+  name    = var.product
+  type    = "A"
+  zone_id = data.aws_route53_zone.dalble.id
+  alias {
+    name                   = module.website.cloudfront_distribution_domain_name
+    zone_id                = module.website.cloudfront_distribution_hosted_zone_id
+    evaluate_target_health = true
   }
 }
 
+locals {
+  sans = ["${var.product}.${var.domain}"]
+}
+
 resource "aws_acm_certificate" "cert" {
-  domain_name       = "${var.product}.dalboth.com"
+  domain_name       = var.domain
   validation_method = "DNS"
+
+  subject_alternative_names = local.sans
 
   tags = {
     env     = var.env
@@ -35,30 +30,21 @@ resource "aws_acm_certificate" "cert" {
   }
 }
 
-module "records" {
-  source  = "terraform-aws-modules/route53/aws//modules/records"
-  version = "~> 2.0"
+locals {
+  dvos = tolist(aws_acm_certificate.cert.domain_validation_options)
+}
 
-  zone_name = module.zones.route53_zone_name["dalboth.com"]
+resource "aws_route53_record" "cert_validation" {
+  count = length(local.sans) + 1
 
-  records = concat([
-    {
-      name = var.product
-      type = "A"
-      alias = {
-        name    = module.website.cloudfront_distribution_domain_name
-        zone_id = module.website.cloudfront_distribution_hosted_zone_id
-      }
-    }
-    ], [for dvo in aws_acm_certificate.cert.domain_validation_options :
-    {
-      name               = dvo.resource_record_name
-      type               = dvo.resource_record_type
-      ttl                = 60
-      full_name_override = true
-      records            = [dvo.resource_record_value]
-    }
-  ])
+  name    = local.dvos[count.index].resource_record_name
+  type    = local.dvos[count.index].resource_record_type
+  zone_id = data.aws_route53_zone.dalble.id
+  records = [local.dvos[count.index].resource_record_value]
+  ttl     = 60
+}
 
-  depends_on = [module.zones]
+resource "aws_acm_certificate_validation" "cert" {
+  certificate_arn         = aws_acm_certificate.cert.arn
+  validation_record_fqdns = aws_route53_record.cert_validation[*].fqdn
 }

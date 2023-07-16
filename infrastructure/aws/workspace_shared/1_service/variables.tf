@@ -30,3 +30,7 @@ variable "src_folder" {
 variable "s3_folder" {
   description = "Location in s3 for uploaded code."
 }
+
+variable "domain" {
+  description = "base domain."
+}
