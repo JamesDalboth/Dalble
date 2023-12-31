@@ -5,7 +5,6 @@ abbey
 abbot
 abhor
 abide
-abled
 abode
 abort
 about
@@ -36,13 +35,10 @@ agape
 agate
 agent
 agile
-aging
 aglow
 agony
-agora
 agree
 ahead
-aider
 aisle
 alarm
 album
@@ -94,17 +90,13 @@ aorta
 apart
 aphid
 aping
-apnea
 apple
 apply
 apron
 aptly
-arbor
-ardor
 arena
 argue
 arise
-armor
 aroma
 arose
 array
@@ -123,7 +115,6 @@ attic
 audio
 audit
 augur
-aunty
 avail
 avert
 avian
@@ -137,7 +128,6 @@ awful
 awoke
 axial
 axiom
-axion
 azure
 bacon
 badge
@@ -197,7 +187,6 @@ bilge
 billy
 binge
 bingo
-biome
 birch
 birth
 bison
@@ -237,7 +226,6 @@ blush
 board
 boast
 bobby
-boney
 bongo
 bonus
 booby
@@ -252,7 +240,6 @@ bosom
 bossy
 botch
 bough
-boule
 bound
 bowel
 boxer
@@ -305,7 +292,6 @@ bunny
 burly
 burnt
 burst
-bused
 bushy
 butch
 butte
@@ -319,7 +305,6 @@ cable
 cacao
 cache
 cacti
-caddy
 cadet
 cagey
 cairn
@@ -331,7 +316,6 @@ canny
 canoe
 canon
 caper
-caput
 carat
 cargo
 carol
@@ -371,7 +355,6 @@ chick
 chide
 chief
 child
-chili
 chill
 chime
 china
@@ -429,7 +412,6 @@ coast
 cobra
 cocoa
 colon
-color
 comet
 comfy
 comic
@@ -494,7 +476,6 @@ crown
 crude
 cruel
 crumb
-crump
 crush
 crust
 crypt
@@ -507,7 +488,6 @@ curse
 curve
 curvy
 cutie
-cyber
 cycle
 cynic
 daddy
@@ -570,7 +550,6 @@ dogma
 doing
 dolly
 donor
-donut
 dopey
 doubt
 dough
@@ -596,7 +575,6 @@ drift
 drill
 drink
 drive
-droit
 droll
 drone
 drool
@@ -607,7 +585,6 @@ drown
 druid
 drunk
 dryer
-dryly
 duchy
 dully
 dummy
@@ -692,7 +669,6 @@ expel
 extol
 extra
 exult
-eying
 fable
 facet
 faint
@@ -706,13 +682,10 @@ fatal
 fatty
 fault
 fauna
-favor
 feast
-fecal
 feign
 fella
 felon
-femme
 femur
 fence
 feral
@@ -723,7 +696,6 @@ fetid
 fetus
 fever
 fewer
-fiber
 fibre
 ficus
 field
@@ -759,7 +731,6 @@ fleck
 fleet
 flesh
 flick
-flier
 fling
 flint
 flirt
@@ -825,7 +796,6 @@ fully
 fungi
 funky
 funny
-furor
 furry
 fussy
 fuzzy
@@ -842,7 +812,6 @@ gauze
 gavel
 gawky
 gayer
-gayly
 gazer
 gecko
 geeky
@@ -853,7 +822,6 @@ ghost
 ghoul
 giant
 giddy
-gipsy
 girly
 girth
 given
@@ -878,7 +846,6 @@ gnash
 gnome
 godly
 going
-golem
 golly
 gonad
 goner
@@ -959,7 +926,6 @@ hasty
 hatch
 hater
 haunt
-haute
 haven
 havoc
 hazel
@@ -987,7 +953,6 @@ hoist
 holly
 homer
 honey
-honor
 horde
 horny
 horse
@@ -1000,7 +965,6 @@ hover
 howdy
 human
 humid
-humor
 humph
 humus
 hunch
@@ -1021,7 +985,6 @@ idiot
 idler
 idyll
 igloo
-iliac
 image
 imbue
 impel
@@ -1065,7 +1028,6 @@ juicy
 jumbo
 jumpy
 junta
-junto
 juror
 kappa
 karma
@@ -1088,7 +1050,6 @@ known
 koala
 krill
 label
-labor
 laden
 ladle
 lager
@@ -1108,7 +1069,6 @@ layer
 leach
 leafy
 leaky
-leant
 leapt
 learn
 lease
@@ -1202,7 +1162,6 @@ march
 marry
 marsh
 mason
-masse
 match
 matey
 mauve
@@ -1239,7 +1198,6 @@ minty
 minus
 mirth
 miser
-missy
 mocha
 modal
 model
@@ -1247,7 +1205,6 @@ modem
 mogul
 moist
 molar
-moldy
 money
 month
 moody
@@ -1311,7 +1268,6 @@ noisy
 nomad
 noose
 north
-nosey
 notch
 novel
 nudge
@@ -1333,7 +1289,6 @@ often
 olden
 older
 olive
-ombre
 omega
 onion
 onset
@@ -1354,7 +1309,6 @@ outgo
 ovary
 ovate
 overt
-ovine
 ovoid
 owing
 owner
@@ -1392,7 +1346,6 @@ pecan
 pedal
 penal
 pence
-penne
 penny
 perch
 peril
@@ -1403,7 +1356,6 @@ petal
 petty
 phase
 phone
-phony
 photo
 piano
 picky
@@ -1413,7 +1365,6 @@ piggy
 pilot
 pinch
 piney
-pinky
 pinto
 piper
 pique
@@ -1435,7 +1386,6 @@ plaza
 plead
 pleat
 plied
-plier
 pluck
 plumb
 plume
@@ -1457,7 +1407,6 @@ posit
 posse
 pouch
 pound
-pouty
 power
 prank
 prawn
@@ -1468,7 +1417,6 @@ prick
 pride
 pried
 prime
-primo
 print
 prior
 prism
@@ -1535,8 +1483,6 @@ rainy
 raise
 rajah
 rally
-ralph
-ramen
 ranch
 randy
 range
@@ -1553,13 +1499,11 @@ react
 ready
 realm
 rearm
-rebar
 rebel
 rebus
 rebut
 recap
 recur
-recut
 reedy
 refer
 refit
@@ -1591,7 +1535,6 @@ ridge
 rifle
 right
 rigid
-rigor
 rinse
 ripen
 riper
@@ -1626,7 +1569,6 @@ ruder
 rugby
 ruler
 rumba
-rumor
 rupee
 rural
 rusty
@@ -1650,7 +1592,6 @@ sauce
 saucy
 sauna
 saute
-savor
 savoy
 savvy
 scald
@@ -1719,7 +1660,6 @@ sheen
 sheep
 sheer
 sheet
-sheik
 shelf
 shell
 shied
@@ -1735,7 +1675,6 @@ shone
 shook
 shoot
 shore
-shorn
 short
 shout
 shove
@@ -1829,7 +1768,6 @@ snore
 snort
 snout
 snowy
-snuck
 snuff
 soapy
 sober
@@ -2031,7 +1969,6 @@ tense
 tenth
 tepee
 tepid
-terra
 terse
 testy
 thank
@@ -2075,7 +2012,6 @@ today
 toddy
 token
 tonal
-tonga
 tonic
 tooth
 topaz
@@ -2131,7 +2067,6 @@ tubal
 tuber
 tulip
 tulle
-tumor
 tunic
 turbo
 tutor
@@ -2176,16 +2111,13 @@ usher
 using
 usual
 usurp
-utile
 utter
 vague
 valet
 valid
-valor
 value
 valve
 vapid
-vapor
 vault
 vaunt
 vegan
@@ -2198,7 +2130,6 @@ verve
 vicar
 video
 vigil
-vigor
 villa
 vinyl
 viola
@@ -2240,7 +2171,6 @@ wedge
 weedy
 weigh
 weird
-welch
 welsh
 wench
 whack
@@ -2281,7 +2211,6 @@ woman
 women
 woody
 wooer
-wooly
 woozy
 wordy
 world
