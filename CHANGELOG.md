@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/JamesDalboth/Dalble/compare/v1.1.1...v1.2.0) (2023-12-31)
+
+
+### Features
+
+* remove us spelling of words ([#11](https://github.com/JamesDalboth/Dalble/issues/11)) ([b6c3609](https://github.com/JamesDalboth/Dalble/commit/b6c3609b1f8cf674f729122d4499479edc332fed))
+
 ## [1.1.1](https://github.com/JamesDalboth/Dalble/compare/v1.1.0...v1.1.1) (2023-07-16)
 
 
